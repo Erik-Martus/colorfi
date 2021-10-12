@@ -1,0 +1,10 @@
+{
+  "name": "colorfi",
+  "version": "1.0.0",
+  "description": "A simple utility for exporting color themes to code.",
+  "main": "app.js",
+  "repository": "https://github.com/Erik-Martus/colorfi.git",
+  "author": "Erik Martus <erik@emartus.dev>",
+  "license": "MIT",
+  "packageManager": "yarn@3.0.2"
+}
