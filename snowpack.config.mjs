@@ -4,7 +4,7 @@ export default {
     public: '/',
     src: '/dist',
   },
-  plugins: ['@snowpack/plugin-postcss'],
+  plugins: ['@snowpack/plugin-postcss', '@snowpack/plugin-babel'],
   routes: [
     /* Enable an SPA Fallback in development: */
     // {"match": "routes", "src": ".*", "dest": "/index.html"},
@@ -14,7 +14,7 @@ export default {
     // "bundle": true,
   },
   packageOptions: {
-    /* ... */
+    knownEntrypoints: ['react/jsx-runtime', '@emotion/react/jsx-runtime'],
   },
   devOptions: {
     tailwindConfig: './tailwind.config.js',

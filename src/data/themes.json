@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Bright",
+    "colors": [
+      { "name": "Mango", "hex": "#FFBE0B" },
+      { "name": "Orange Pantone", "hex": "#FB5607" },
+      { "name": "Winter Sky", "hex": "#FF006E" },
+      { "name": "Blue Violet", "hex": "#8338EC" },
+      { "name": "Azure", "hex": "#3A86FF" }
+    ]
+  },
+  {
+    "name": "Blue-Yellow",
+    "colors": [
+      { "name": "Royal Dark Blue", "hex": "#00296B" },
+      { "name": "Dark Cornflower Blue", "hex": "#003F88" },
+      { "name": "USAFA Blue", "hex": "#00509D" },
+      { "name": "Mikado Yellow", "hex": "#FFC500" },
+      { "name": "Cyber Yellow", "hex": "#FFD500" }
+    ]
+  }
+]
