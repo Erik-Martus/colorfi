@@ -1,21 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { css } from '@emotion/react';
 import colorThemes from '../data/themes.json';
 
-function Themes() {
-  const [activeTheme, setActiveTheme] = useState('');
-  const handleChange = (event) => setActiveTheme(event.target.value);
+function Themes({ onActiveThemeChange }) {
   const themeItems = colorThemes.map((theme) => (
-    <article key={`theme-${theme.name}`}>
+    <article key={`theme-${theme.name}`} className="w-96">
       <input
         type="radio"
-        id={`theme-${theme.name}`}
+        id={theme.name}
         name="colorTheme"
-        value={`theme-${theme.name}`}
-        onChange={handleChange}
+        value={theme.name}
+        onChange={onActiveThemeChange}
       />
-      <label htmlFor={`theme-${theme.name}`}>
-        <div className="flex w-96">
+      <label htmlFor={theme.name}>
+        <div className="flex">
           {theme.colors.map((color) => {
             return (
               <span
@@ -37,9 +36,13 @@ function Themes() {
     <article>
       <h2>Themes</h2>
       <div className="flex gap-6">{themeItems}</div>
-      <p>Active theme is {activeTheme}</p>
     </article>
   );
 }
+
+Themes.propTypes = {
+  activeTheme: PropTypes.string,
+  onActiveThemeChange: PropTypes.func,
+};
 
 export default Themes;
