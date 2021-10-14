@@ -1,25 +1,21 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { css } from '@emotion/react';
+import ColorController from './ColorController';
 
-function ThemeBuilder({ themeColors, onThemeColorsChange }) {
-  console.log(themeColors);
-  const colorItems = themeColors.map((color) => (
-    <article key={color.name} className="w-96">
-      <div
-        className="h-24"
-        css={css`
-          background-color: ${color.hex};
-        `}
-      ></div>
-      <strong>{color.name}</strong>
-    </article>
+function ThemeBuilder({ themeColors, onThemeColorsAdd, onThemeColorsChange }) {
+  const colorItems = themeColors.map((color, index) => (
+    <ColorController
+      key={`color-${index}`}
+      color={color}
+      colorIndex={index}
+      onThemeColorsChange={onThemeColorsChange}
+    />
   ));
   return (
     <article>
       <h2>Colors</h2>
-      <div className="flex gap-6">{colorItems}</div>
-      <button type="button" onClick={onThemeColorsChange}>
+      <div className="flex gap-6 flex-wrap">{colorItems}</div>
+      <button type="button" onClick={onThemeColorsAdd}>
         Add
       </button>
     </article>

@@ -8,6 +8,24 @@ import colorThemes from '../data/themes.json';
 function App() {
   const [activeTheme, setActiveTheme] = useState('');
   const [themeColors, setThemeColors] = useState([]);
+  const handleThemeColorAdd = () => {
+    let hexColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+    setThemeColors((oldThemeColors) => [
+      ...oldThemeColors,
+      {
+        name: hexColor,
+        hex: hexColor,
+      },
+    ]);
+  };
+  const handleThemeColorChange = (event) => {
+    let colorIndex = parseInt(event.target.id.slice(6), 10);
+    setThemeColors((oldThemeColors) => {
+      const newThemeColors = [...oldThemeColors];
+      newThemeColors[colorIndex].name = event.target.value;
+      return newThemeColors;
+    });
+  };
 
   return (
     <div className="App">
@@ -29,18 +47,8 @@ function App() {
         <p>The current theme is {activeTheme}</p>
         <ThemeBuilder
           themeColors={themeColors}
-          onThemeColorsChange={() => {
-            let hexColor = `#${Math.floor(Math.random() * 16777215).toString(
-              16
-            )}`;
-            setThemeColors((oldThemeColors) => [
-              ...oldThemeColors,
-              {
-                name: hexColor,
-                hex: hexColor,
-              },
-            ]);
-          }}
+          onThemeColorsAdd={handleThemeColorAdd}
+          onThemeColorsChange={handleThemeColorChange}
         />
       </main>
     </div>
