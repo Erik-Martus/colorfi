@@ -19,7 +19,7 @@ function App() {
     ]);
   };
   const handleThemeColorChange = (event) => {
-    let colorIndex = parseInt(event.target.id.slice(6), 10);
+    let colorIndex = parseInt(event.target.id.split('-')[1], 10);
     setThemeColors((oldThemeColors) => {
       const newThemeColors = [...oldThemeColors];
       newThemeColors[colorIndex].name = event.target.value;
