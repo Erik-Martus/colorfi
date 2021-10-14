@@ -30,11 +30,14 @@ function App() {
         <ThemeBuilder
           themeColors={themeColors}
           onThemeColorsChange={() => {
+            let hexColor = `#${Math.floor(Math.random() * 16777215).toString(
+              16
+            )}`;
             setThemeColors((oldThemeColors) => [
               ...oldThemeColors,
               {
-                name: `test${Math.floor(Math.random() * 23)}`,
-                hex: `#${Math.floor(Math.random() * 16777215).toString(16)}`,
+                name: hexColor,
+                hex: hexColor,
               },
             ]);
           }}
