@@ -1,41 +1,73 @@
-import React, { useState } from 'react';
-import { css } from '@emotion/react';
+import React, { useState, useEffect } from 'react';
 import { HexColorPicker, HexColorInput } from 'react-colorful';
 
-function ColorController({ color, colorIndex, onThemeColorsChange }) {
-  const [pickerColor, setPickerColor] = useState(color.hex);
+function ColorController({ color, onThemeColorChange }) {
+  const [colorData, setColorData] = useState(color);
+  useEffect(() => {
+    setColorData(color);
+  }, [color]);
+
+  const handleColorDataChange = () => {
+    onThemeColorChange(colorData);
+  };
+
+  const [colorName, setColorName] = useState(color.name);
+  useEffect(() => {
+    setColorName(color.name);
+  }, [color]);
+
+  const handleColorNameChange = (event) => {
+    let newColorData = colorData;
+    newColorData.name = event.target.value;
+    setColorData(newColorData);
+    setColorName(event.target.value);
+  };
+
+  const [pickerColor, setPickerColor] = useState(color.DEFAULT);
+  useEffect(() => {
+    setPickerColor(color.DEFAULT);
+  }, [color]);
+
   const handlePickerChange = (event) => {
-    console.log(event);
+    let newColorData = colorData;
+    newColorData.DEFAULT = event;
+    setColorData(newColorData);
     setPickerColor(event);
   };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  };
+
   return (
-    <article className="w-96">
+    <form className="w-96" onSubmit={handleSubmit}>
       <div className="h-24" style={{ backgroundColor: pickerColor }}></div>
-      <strong>{color.name}</strong>
+      <strong>{colorName ? colorName : 'Color Name'}</strong>
       <div>
         <div className="form-control">
-          <label htmlFor={`colorName-${colorIndex}`}>Color Name:</label>
+          <label htmlFor={`colorName-${colorData.id}`}>Color Name:</label>
           <input
+            id={`colorName-${colorData.id}`}
             type="text"
-            id={`colorName-${colorIndex}`}
-            value={color.name}
-            onChange={onThemeColorsChange}
+            value={colorName}
+            onChange={handleColorNameChange}
           ></input>
         </div>
         <div className="form-control">
           <HexColorPicker
+            id={`colorPicker-${colorData.id}`}
             color={pickerColor}
-            id={`colorPicker-${colorIndex}`}
             onChange={handlePickerChange}
           />
           <HexColorInput
+            id={`colorInput-${colorData.id}`}
             color={pickerColor}
-            id={`colorInput-${colorIndex}`}
+            prefixed={true}
             onChange={handlePickerChange}
           />
         </div>
       </div>
-    </article>
+    </form>
   );
 }
 

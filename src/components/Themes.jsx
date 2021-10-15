@@ -5,7 +5,7 @@ import colorThemes from '../data/themes.json';
 
 function Themes({ onActiveThemeChange }) {
   const themeItems = colorThemes.map((theme) => (
-    <article key={`theme-${theme.name}`} className="w-96">
+    <article key={theme.name} className="w-96">
       <input
         type="radio"
         id={theme.name}
@@ -18,10 +18,10 @@ function Themes({ onActiveThemeChange }) {
           {theme.colors.map((color) => {
             return (
               <span
-                key={color.name}
+                key={color.id}
                 className="flex-grow h-24"
                 css={css`
-                  background-color: ${color.hex};
+                  background-color: ${color.DEFAULT};
                 `}
               ></span>
             );

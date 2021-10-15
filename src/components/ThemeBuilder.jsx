@@ -2,22 +2,23 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import ColorController from './ColorController';
 
-function ThemeBuilder({ themeColors, onThemeColorsAdd, onThemeColorsChange }) {
-  const colorItems = themeColors.map((color, index) => (
+function ThemeBuilder({ themeColors, onThemeColorAdd, onThemeColorChange }) {
+  const colorItems = themeColors.map((color) => (
     <ColorController
-      key={`color-${index}`}
+      key={color.id}
       color={color}
-      colorIndex={index}
-      onThemeColorsChange={onThemeColorsChange}
+      onThemeColorChange={onThemeColorChange}
     />
   ));
   return (
     <article>
       <h2>Colors</h2>
-      <div className="flex gap-6 flex-wrap">{colorItems}</div>
-      <button type="button" onClick={onThemeColorsAdd}>
-        Add
-      </button>
+      <div className="flex gap-6 flex-wrap">
+        {colorItems}
+        <button type="button" onClick={onThemeColorAdd}>
+          Add
+        </button>
+      </div>
     </article>
   );
 }

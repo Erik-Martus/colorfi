@@ -2,21 +2,25 @@
   {
     "name": "Bright",
     "colors": [
-      { "name": "Mango", "hex": "#FFBE0B" },
-      { "name": "Orange Pantone", "hex": "#FB5607" },
-      { "name": "Winter Sky", "hex": "#FF006E" },
-      { "name": "Blue Violet", "hex": "#8338EC" },
-      { "name": "Azure", "hex": "#3A86FF" }
+      { "id": "color-d149", "name": "Mango", "DEFAULT": "#FFBE0B" },
+      { "id": "color-ea16", "name": "Orange Pantone", "DEFAULT": "#FB5607" },
+      { "id": "color-7043", "name": "Winter Sky", "DEFAULT": "#FF006E" },
+      { "id": "color-c8f7", "name": "Blue Violet", "DEFAULT": "#8338EC" },
+      { "id": "color-e735", "name": "Azure", "DEFAULT": "#3A86FF" }
     ]
   },
   {
     "name": "Blue-Yellow",
     "colors": [
-      { "name": "Royal Dark Blue", "hex": "#00296B" },
-      { "name": "Dark Cornflower Blue", "hex": "#003F88" },
-      { "name": "USAFA Blue", "hex": "#00509D" },
-      { "name": "Mikado Yellow", "hex": "#FFC500" },
-      { "name": "Cyber Yellow", "hex": "#FFD500" }
+      { "id": "color-f3b4", "name": "Royal Dark Blue", "DEFAULT": "#00296B" },
+      {
+        "id": "color-53ac",
+        "name": "Dark Cornflower Blue",
+        "DEFAULT": "#003F88"
+      },
+      { "id": "color-f882", "name": "USAFA Blue", "DEFAULT": "#00509D" },
+      { "id": "color-68e9", "name": "Mikado Yellow", "DEFAULT": "#FFC500" },
+      { "id": "color-bc6c", "name": "Cyber Yellow", "DEFAULT": "#FFD500" }
     ]
   }
 ]
