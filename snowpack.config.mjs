@@ -14,7 +14,11 @@ export default {
     // "bundle": true,
   },
   packageOptions: {
-    knownEntrypoints: ['react/jsx-runtime', '@emotion/react/jsx-runtime'],
+    knownEntrypoints: [
+      'react/jsx-runtime',
+      '@emotion/react/jsx-runtime',
+      'highlight.js/lib/core',
+    ],
   },
   devOptions: {
     tailwindConfig: './tailwind.config.js',

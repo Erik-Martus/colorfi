@@ -10,6 +10,7 @@
     "@snowpack/plugin-babel": "^2.1.7",
     "@snowpack/plugin-postcss": "^1.4.3",
     "autoprefixer": "^10.3.7",
+    "babel-plugin-prismjs": "^2.1.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-react": "^7.26.1",
@@ -21,10 +22,13 @@
   },
   "dependencies": {
     "@emotion/react": "^11.4.1",
+    "highlight.js": "^11.2.0",
     "lodash": "^4.17.21",
+    "prismjs": "^1.25.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-colorful": "^5.5.0",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-highlight": "^0.14.0"
   }
 }

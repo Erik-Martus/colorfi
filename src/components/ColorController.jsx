@@ -21,6 +21,7 @@ function ColorController({ color, onThemeColorChange }) {
     newColorData.name = event.target.value;
     setColorData(newColorData);
     setColorName(event.target.value);
+    handleColorDataChange();
   };
 
   const [pickerColor, setPickerColor] = useState(color.DEFAULT);
@@ -33,6 +34,7 @@ function ColorController({ color, onThemeColorChange }) {
     newColorData.DEFAULT = event;
     setColorData(newColorData);
     setPickerColor(event);
+    handleColorDataChange();
   };
 
   const handleSubmit = (event) => {
