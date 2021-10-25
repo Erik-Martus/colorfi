@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import colorThemes from '../data/themes.json';
 import Header from './Header.jsx';
 import Themes from './Themes.jsx';
@@ -31,11 +31,35 @@ function App() {
 
   const handleThemeColorAdd = () => {
     let hexColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+    let order = themeColors.length + 1;
+    let colorName =
+      order === 1
+        ? 'Primary'
+        : order === 2
+        ? 'Secondary'
+        : order === 3
+        ? 'Tertiary'
+        : order === 4
+        ? 'Quaternary'
+        : order === 5
+        ? 'Quinary'
+        : order === 6
+        ? 'Senary'
+        : order === 7
+        ? 'Septenary'
+        : order === 8
+        ? 'Octonary'
+        : order === 9
+        ? 'Nonary'
+        : order === 10
+        ? 'Denary'
+        : `Color${order}`;
     setThemeColors((oldThemeColors) => [
       ...oldThemeColors,
       {
         id: cid(),
-        name: hexColor,
+        name: colorName,
+        safeName: colorName.toLowerCase(),
         DEFAULT: hexColor,
       },
     ]);
