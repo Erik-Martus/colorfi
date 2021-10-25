@@ -11,9 +11,46 @@ const cid = () => {
     .substring(1)}`;
 };
 
+const genHex = () => {
+  return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+};
+
 function App() {
+  const initTheme = [
+    {
+      id: cid(),
+      name: 'Primary',
+      safeName: 'primary',
+      DEFAULT: genHex(),
+    },
+    {
+      id: cid(),
+      name: 'Secondary',
+      safeName: 'secondary',
+      DEFAULT: genHex(),
+    },
+    {
+      id: cid(),
+      name: 'Tertiary',
+      safeName: 'tertiary',
+      DEFAULT: genHex(),
+    },
+    {
+      id: cid(),
+      name: 'Quaternary',
+      safeName: 'quaternary',
+      DEFAULT: genHex(),
+    },
+    {
+      id: cid(),
+      name: 'Quinary',
+      safeName: 'quinary',
+      DEFAULT: genHex(),
+    },
+  ];
+
   const [activeTheme, setActiveTheme] = useState('');
-  const [themeColors, setThemeColors] = useState([]);
+  const [themeColors, setThemeColors] = useState(initTheme);
 
   const findThemeColor = (key, value) => {
     let index = themeColors.findIndex((obj) => obj[key] === value);
@@ -30,7 +67,7 @@ function App() {
   };
 
   const handleThemeColorAdd = () => {
-    let hexColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+    let hexColor = genHex();
     let order = themeColors.length + 1;
     let colorName =
       order === 1
@@ -88,7 +125,6 @@ function App() {
           activeTheme={activeTheme}
           onActiveThemeChange={handleThemeChange}
         />
-        <p>The current theme is {activeTheme}</p>
         <ThemeBuilder
           themeColors={themeColors}
           onThemeColorAdd={handleThemeColorAdd}
