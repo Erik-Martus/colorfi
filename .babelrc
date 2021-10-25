@@ -5,5 +5,14 @@
       { "runtime": "automatic", "importSource": "@emotion/react" }
     ]
   ],
-  "plugins": ["@emotion"]
+  "plugins": [
+    "@emotion",
+    [
+      "prismjs",
+      {
+        "languages": ["javascript", "css", "scss", "sass", "less"],
+        "css": false
+      }
+    ]
+  ]
 }

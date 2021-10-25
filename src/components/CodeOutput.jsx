@@ -8,7 +8,50 @@ function CodeOutput({ themeColors }) {
     setColors(themeColors);
   }, [themeColors]);
 
-  return <CodeHighlight language="javascript" colors={colors}></CodeHighlight>;
+  const cssSyntax = `:root {${colors.map((color) => {
+    let varDecl = `--${color.safeName}: ${color.DEFAULT};`;
+    return `\n  ${varDecl}`;
+  })}
+}`;
+
+  const scssSyntax = `${colors.map((color, index) => {
+    let varDecl = `\$${color.safeName}: ${color.DEFAULT};`;
+    return index === 0 ? varDecl : `\n${varDecl}`;
+  })}`;
+
+  const sassSyntax = scssSyntax.replaceAll(';', '');
+
+  const lessSyntax = scssSyntax.replaceAll('$', '@');
+
+  const tailwindSyntax = `module.exports = {
+  theme: {
+    extend: {
+      colors: {${colors.map((color) => {
+        let varDecl = `"${color.safeName}": "${color.DEFAULT}"`;
+        return `\n        ${varDecl}`;
+      })}
+      }
+    }
+  }
+}`;
+
+  return (
+    <>
+      <CodeHighlight language="css">
+        {cssSyntax.replaceAll(',', '')}
+      </CodeHighlight>
+      <CodeHighlight language="scss">
+        {scssSyntax.replaceAll(',', '')}
+      </CodeHighlight>
+      <CodeHighlight language="sass">
+        {sassSyntax.replaceAll(',', '')}
+      </CodeHighlight>
+      <CodeHighlight language="less">
+        {lessSyntax.replaceAll(',', '')}
+      </CodeHighlight>
+      <CodeHighlight language="javascript">{tailwindSyntax}</CodeHighlight>
+    </>
+  );
 }
 
 export default CodeOutput;

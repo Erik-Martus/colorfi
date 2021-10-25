@@ -2,25 +2,71 @@
   {
     "name": "Bright",
     "colors": [
-      { "id": "color-d149", "name": "Mango", "DEFAULT": "#FFBE0B" },
-      { "id": "color-ea16", "name": "Orange Pantone", "DEFAULT": "#FB5607" },
-      { "id": "color-7043", "name": "Winter Sky", "DEFAULT": "#FF006E" },
-      { "id": "color-c8f7", "name": "Blue Violet", "DEFAULT": "#8338EC" },
-      { "id": "color-e735", "name": "Azure", "DEFAULT": "#3A86FF" }
+      {
+        "id": "color-d149",
+        "name": "Mango",
+        "safeName": "mango",
+        "DEFAULT": "#FFBE0B"
+      },
+      {
+        "id": "color-ea16",
+        "name": "Orange Pantone",
+        "safeName": "orange-pantone",
+        "DEFAULT": "#FB5607"
+      },
+      {
+        "id": "color-7043",
+        "name": "Winter Sky",
+        "safeName": "winter-sky",
+        "DEFAULT": "#FF006E"
+      },
+      {
+        "id": "color-c8f7",
+        "name": "Blue Violet",
+        "safeName": "blue-violet",
+        "DEFAULT": "#8338EC"
+      },
+      {
+        "id": "color-e735",
+        "name": "Azure",
+        "safeName": "azure",
+        "DEFAULT": "#3A86FF"
+      }
     ]
   },
   {
     "name": "Blue-Yellow",
     "colors": [
-      { "id": "color-f3b4", "name": "Royal Dark Blue", "DEFAULT": "#00296B" },
+      {
+        "id": "color-f3b4",
+        "name": "Royal Dark Blue",
+        "safeName": "royal-dark-blue",
+        "DEFAULT": "#00296B"
+      },
       {
         "id": "color-53ac",
         "name": "Dark Cornflower Blue",
+        "safeName": "dark-cornflower-blue",
         "DEFAULT": "#003F88"
       },
-      { "id": "color-f882", "name": "USAFA Blue", "DEFAULT": "#00509D" },
-      { "id": "color-68e9", "name": "Mikado Yellow", "DEFAULT": "#FFC500" },
-      { "id": "color-bc6c", "name": "Cyber Yellow", "DEFAULT": "#FFD500" }
+      {
+        "id": "color-f882",
+        "name": "USAFA Blue",
+        "safeName": "usafa-blue",
+        "DEFAULT": "#00509D"
+      },
+      {
+        "id": "color-68e9",
+        "name": "Mikado Yellow",
+        "safeName": "mikado-yellow",
+        "DEFAULT": "#FFC500"
+      },
+      {
+        "id": "color-bc6c",
+        "name": "Cyber Yellow",
+        "safeName": "cyber-yellow",
+        "DEFAULT": "#FFD500"
+      }
     ]
   }
 ]

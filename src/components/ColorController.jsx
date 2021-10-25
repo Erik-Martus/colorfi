@@ -19,6 +19,7 @@ function ColorController({ color, onThemeColorChange }) {
   const handleColorNameChange = (event) => {
     let newColorData = colorData;
     newColorData.name = event.target.value;
+    newColorData.safeName = event.target.value.toLowerCase().replace(' ', '-');
     setColorData(newColorData);
     setColorName(event.target.value);
     handleColorDataChange();

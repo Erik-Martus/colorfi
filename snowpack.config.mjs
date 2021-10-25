@@ -18,6 +18,13 @@ export default {
       'react/jsx-runtime',
       '@emotion/react/jsx-runtime',
       'highlight.js/lib/core',
+      'prismjs/components/prism-core',
+      'prismjs/components/prism-javascript',
+      'prismjs/components/prism-clike',
+      'prismjs/components/prism-css',
+      'prismjs/components/prism-scss',
+      'prismjs/components/prism-sass',
+      'prismjs/components/prism-less',
     ],
   },
   devOptions: {
