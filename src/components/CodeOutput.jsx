@@ -9,13 +9,13 @@ function CodeOutput({ themeColors }) {
   }, [themeColors]);
 
   const cssSyntax = `:root {${colors.map((color) => {
-    let varDecl = `--${color.safeName}: ${color.DEFAULT};`;
+    let varDecl = `--${color.safeName}: ${color.hex};`;
     return `\n  ${varDecl}`;
   })}
 }`;
 
   const scssSyntax = `${colors.map((color, index) => {
-    let varDecl = `\$${color.safeName}: ${color.DEFAULT};`;
+    let varDecl = `\$${color.safeName}: ${color.hex};`;
     return index === 0 ? varDecl : `\n${varDecl}`;
   })}`;
 
@@ -27,7 +27,7 @@ function CodeOutput({ themeColors }) {
   theme: {
     extend: {
       colors: {${colors.map((color) => {
-        let varDecl = `"${color.safeName}": "${color.DEFAULT}"`;
+        let varDecl = `"${color.safeName}": "${color.hex}"`;
         return `\n        ${varDecl}`;
       })}
       }

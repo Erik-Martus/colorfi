@@ -21,31 +21,31 @@ function App() {
       id: cid(),
       name: 'Primary',
       safeName: 'primary',
-      DEFAULT: genHex(),
+      hex: genHex(),
     },
     {
       id: cid(),
       name: 'Secondary',
       safeName: 'secondary',
-      DEFAULT: genHex(),
+      hex: genHex(),
     },
     {
       id: cid(),
       name: 'Tertiary',
       safeName: 'tertiary',
-      DEFAULT: genHex(),
+      hex: genHex(),
     },
     {
       id: cid(),
       name: 'Quaternary',
       safeName: 'quaternary',
-      DEFAULT: genHex(),
+      hex: genHex(),
     },
     {
       id: cid(),
       name: 'Quinary',
       safeName: 'quinary',
-      DEFAULT: genHex(),
+      hex: genHex(),
     },
   ];
 
@@ -76,7 +76,7 @@ function App() {
         id: cid(),
         name: colorName,
         safeName: colorName.toLowerCase(),
-        DEFAULT: hexColor,
+        hex: hexColor,
       },
     ]);
     setColorCount((currentCount) => currentCount + 1);

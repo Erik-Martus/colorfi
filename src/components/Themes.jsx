@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/react';
+import Swatch from './Swatch';
 import colorThemes from '../data/themes.json';
 
 function Themes({ onActiveThemeChange }) {
@@ -14,19 +15,7 @@ function Themes({ onActiveThemeChange }) {
         onChange={onActiveThemeChange}
       />
       <label htmlFor={theme.name}>
-        <div className="flex">
-          {theme.colors.map((color) => {
-            return (
-              <span
-                key={color.id}
-                className="flex-grow h-24"
-                css={css`
-                  background-color: ${color.DEFAULT};
-                `}
-              ></span>
-            );
-          })}
-        </div>
+        <Swatch colors={theme.colors} />
         <strong>{theme.name}</strong>
       </label>
     </article>
