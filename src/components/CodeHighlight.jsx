@@ -1,10 +1,8 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Prism from 'prismjs';
-// import loadLanguages from 'prismjs/components/';
 import '../css/prism.css';
-
-// loadLanguages(['scss']);
+import copyIcon from '../icons/copy.svg';
 
 function CodeHighlight({ language, children }) {
   const codeNode = React.useRef();
@@ -14,11 +12,21 @@ function CodeHighlight({ language, children }) {
   }, [children]);
 
   return (
-    <pre>
-      <code ref={codeNode} className={`language-${language}`}>
-        {children}
-      </code>
-    </pre>
+    <div id={`codeblock-${language}`}>
+      <button
+        role="button"
+        onClick={() => {
+          navigator.clipboard.writeText(children);
+        }}
+      >
+        <img src={copyIcon} alt="Copy" />
+      </button>
+      <pre>
+        <code ref={codeNode} className={`language-${language}`}>
+          {children}
+        </code>
+      </pre>
+    </div>
   );
 }
 
