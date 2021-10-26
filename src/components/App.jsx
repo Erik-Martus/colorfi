@@ -102,6 +102,12 @@ function App() {
     ]);
   };
 
+  const handleThemeColorRemove = (id) => {
+    setThemeColors((oldThemeColors) => {
+      return oldThemeColors.filter((color) => color.id !== id);
+    });
+  };
+
   const handleColorChange = (event) => {
     let updatedColor = event;
     let colorIndex = findThemeColor('id', event.id);
@@ -128,6 +134,7 @@ function App() {
         <ThemeBuilder
           themeColors={themeColors}
           onThemeColorAdd={handleThemeColorAdd}
+          onThemeColorRemove={handleThemeColorRemove}
           onThemeColorChange={handleColorChange}
         />
         <CodeOutput themeColors={themeColors} />

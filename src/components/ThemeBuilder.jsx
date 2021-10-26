@@ -2,12 +2,18 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import ColorController from './ColorController';
 
-function ThemeBuilder({ themeColors, onThemeColorAdd, onThemeColorChange }) {
+function ThemeBuilder({
+  themeColors,
+  onThemeColorAdd,
+  onThemeColorRemove,
+  onThemeColorChange,
+}) {
   const colorItems = themeColors.map((color) => (
     <ColorController
       key={color.id}
       color={color}
       onThemeColorChange={onThemeColorChange}
+      onThemeColorRemove={onThemeColorRemove}
     />
   ));
   return (
