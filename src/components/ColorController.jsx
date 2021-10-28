@@ -70,7 +70,7 @@ function ColorController({ color, onThemeColorChange, onThemeColorRemove }) {
 
   const [shadePosition, setShadePosition] = useState(5);
   const handleShadePositionChange = (event) => {
-    setShadePosition(event.target.value);
+    setShadePosition(parseInt(event.target.value));
   };
 
   const [hueAmount, setHueAmount] = useState(0);
