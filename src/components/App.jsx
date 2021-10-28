@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import chroma from 'chroma-js';
 import colorThemes from '../data/themes.json';
 import Header from './Header.jsx';
 import Themes from './Themes.jsx';
@@ -12,7 +13,7 @@ const cid = () => {
 };
 
 const genHex = () => {
-  return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+  return chroma.random().hex().toUpperCase();
 };
 
 function App() {
