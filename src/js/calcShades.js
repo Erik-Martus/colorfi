@@ -29,7 +29,10 @@ function calcShades(
         lightness < 0 ? 0 : lightness
       )
       .hex();
-    shades[shadeIndex - i] = { id: `${(pos - i) * 100}`, hex: shade };
+    shades[shadeIndex - i] = {
+      id: `${(pos - i) * 100}`,
+      hex: shade.toUpperCase(),
+    };
   }
 
   for (let i = 1; i <= rightAmount; i++) {
@@ -44,10 +47,12 @@ function calcShades(
         lightness > 1 ? 1 : lightness
       )
       .hex();
-    shades[shadeIndex + i] = { id: `${(pos + i) * 100}`, hex: shade };
+    shades[shadeIndex + i] = {
+      id: `${(pos + i) * 100}`,
+      hex: shade.toUpperCase(),
+    };
   }
 
-  console.log(shades);
   return shades;
 }
 

@@ -11,9 +11,9 @@ function ColorController({ color, onThemeColorChange, onThemeColorRemove }) {
     setColorData(color);
   }, [color]);
 
-  const handleColorDataChange = () => {
+  useEffect(() => {
     onThemeColorChange(colorData);
-  };
+  }, [colorData]);
 
   const [colorName, setColorName] = useState(color.name);
   useEffect(() => {
@@ -21,12 +21,7 @@ function ColorController({ color, onThemeColorChange, onThemeColorRemove }) {
   }, [color]);
 
   const handleColorNameChange = (event) => {
-    let newColorData = colorData;
-    newColorData.name = event.target.value;
-    newColorData.safeName = event.target.value.toLowerCase().replace(' ', '-');
-    setColorData(newColorData);
     setColorName(event.target.value);
-    handleColorDataChange();
   };
 
   const [pickerColor, setPickerColor] = useState(color.hex);
@@ -35,11 +30,7 @@ function ColorController({ color, onThemeColorChange, onThemeColorRemove }) {
   }, [color]);
 
   const handlePickerChange = (event) => {
-    let newColorData = colorData;
-    newColorData.hex = event;
-    setColorData(newColorData);
-    setPickerColor(event);
-    handleColorDataChange();
+    setPickerColor(event.toUpperCase());
   };
 
   const handleRemove = () => {
@@ -112,6 +103,16 @@ function ColorController({ color, onThemeColorChange, onThemeColorRemove }) {
     lightnessAmount,
   ]);
 
+  useEffect(() => {
+    let newColorData = colorData;
+    newColorData.name = colorName;
+    newColorData.hex = pickerColor;
+    newColorData.enableShade = enableShade;
+    newColorData.shades = shades;
+    setColorData(newColorData);
+    onThemeColorChange(newColorData);
+  }, [colorName, pickerColor, enableShade, shades]);
+
   return (
     <div className="w-96">
       <Swatch colors={enableShade ? shades : [colorData]} />
@@ -133,7 +134,7 @@ function ColorController({ color, onThemeColorChange, onThemeColorRemove }) {
           <HexColorPicker
             id={`colorPicker-${colorData.id}`}
             color={pickerColor}
-            onChange={debounce(handlePickerChange, 200)}
+            onChange={handlePickerChange}
           />
           <HexColorInput
             id={`colorInput-${colorData.id}`}

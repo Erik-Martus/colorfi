@@ -8,14 +8,26 @@ function CodeOutput({ themeColors }) {
     setColors(themeColors);
   }, [themeColors]);
 
+  const catName = (name) => name.toLowerCase().replaceAll(' ', '-');
+
   const cssSyntax = `:root {${colors.map((color) => {
-    let varDecl = `--${color.safeName}: ${color.hex};`;
+    let varDecl = color.enableShade
+      ? color.shades.map((shade, index) => {
+          let shadeDecl = `--${catName(color.name)}-${shade.id}: ${shade.hex};`;
+          return index === 0 ? shadeDecl : `\n  ${shadeDecl}`;
+        })
+      : `--${catName(color.name)}: ${color.hex};`;
     return `\n  ${varDecl}`;
   })}
 }`;
 
   const scssSyntax = `${colors.map((color, index) => {
-    let varDecl = `\$${color.safeName}: ${color.hex};`;
+    let varDecl = color.enableShade
+      ? color.shades.map((shade, index) => {
+          let shadeDecl = `\$${catName(color.name)}-${shade.id}: ${shade.hex};`;
+          return index === 0 ? shadeDecl : `\n${shadeDecl}`;
+        })
+      : `\$${catName(color.name)}: ${color.hex};`;
     return index === 0 ? varDecl : `\n${varDecl}`;
   })}`;
 
@@ -27,8 +39,20 @@ function CodeOutput({ themeColors }) {
   theme: {
     extend: {
       colors: {${colors.map((color) => {
-        let varDecl = `"${color.safeName}": "${color.hex}"`;
-        return `\n        ${varDecl}`;
+        if (color.enableShade) {
+          console.log('shadeEnabled');
+          let varDecl = `"${catName(color.name)}": {${color.shades.map(
+            (shade) => {
+              let shadeDecl = `"${shade.id}": "${shade.hex}"`;
+              return `\n          ${shadeDecl}`;
+            }
+          )}
+        }`;
+          return `\n        ${varDecl}`;
+        } else {
+          let varDecl = `"${catName(color.name)}": "${color.hex}"`;
+          return `\n        ${varDecl}`;
+        }
       })}
       }
     }

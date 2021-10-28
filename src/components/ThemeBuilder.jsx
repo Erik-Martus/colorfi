@@ -5,8 +5,8 @@ import ColorController from './ColorController';
 function ThemeBuilder({
   themeColors,
   onThemeColorAdd,
-  onThemeColorRemove,
   onThemeColorChange,
+  onThemeColorRemove,
 }) {
   const colorItems = themeColors.map((color) => (
     <ColorController
