@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { HexColorPicker, HexColorInput } from 'react-colorful';
 import Swatch from './Swatch';
 import calcShades from '../js/calcShades';
+import debounce from '../js/debounce';
 import trashIcon from '../icons/trash.svg';
 
 function ColorController({ color, onThemeColorChange, onThemeColorRemove }) {
@@ -132,7 +133,7 @@ function ColorController({ color, onThemeColorChange, onThemeColorRemove }) {
           <HexColorPicker
             id={`colorPicker-${colorData.id}`}
             color={pickerColor}
-            onChange={handlePickerChange}
+            onChange={debounce(handlePickerChange, 200)}
           />
           <HexColorInput
             id={`colorInput-${colorData.id}`}
