@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import chroma from 'chroma-js';
 import colorThemes from '../data/themes.json';
 import Header from './Header.jsx';
+import Intro from './Intro';
+import Footer from './Footer.jsx';
 import Themes from './Themes.jsx';
 import ThemeBuilder from './ThemeBuilder.jsx';
 import CodeOutput from './CodeOutput.jsx';
@@ -101,13 +103,14 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="App relative font-sans bg-gray-100">
       <Header />
-      <main className="container">
-        <Themes
+      <main className="container bg-white pt-6 px-4 pb-8 rounded-xl border-2 border-gray-900">
+        {/* <Themes
           activeTheme={activeTheme}
           onActiveThemeChange={handleThemeChange}
-        />
+        /> */}
+        <Intro />
         <ThemeBuilder
           themeColors={themeColors}
           onThemeColorAdd={handleThemeColorAdd}
@@ -116,6 +119,7 @@ function App() {
         />
         <CodeOutput themeColors={themeColors} />
       </main>
+      <Footer />
     </div>
   );
 }

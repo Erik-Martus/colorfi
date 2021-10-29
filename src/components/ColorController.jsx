@@ -3,7 +3,7 @@ import { HexColorPicker, HexColorInput } from 'react-colorful';
 import Swatch from './Swatch';
 import calcShades from '../js/calcShades';
 import debounce from '../js/debounce';
-import trashIcon from '../icons/trash.svg';
+import TrashIcon from '../icons/trash.svg';
 
 function ColorController({ color, onThemeColorChange, onThemeColorRemove }) {
   const [colorData, setColorData] = useState(color);
@@ -118,7 +118,7 @@ function ColorController({ color, onThemeColorChange, onThemeColorRemove }) {
       <Swatch colors={enableShade ? shades : [colorData]} />
       <strong>{colorName ? colorName : 'Color Name'}</strong>
       <button role="button" onClick={handleRemove}>
-        <img src={trashIcon} alt="Delete" />
+        <TrashIcon />
       </button>
       <div>
         <div className="form-control">

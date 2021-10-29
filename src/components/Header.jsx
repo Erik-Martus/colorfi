@@ -1,20 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
-import ghIcon from '../icons/github.svg';
+import Logo from './logo.svg';
+import GhIcon from '../icons/github.svg';
 
 function Header() {
   return (
-    <header className="container flex justify-between">
-      <img src={logo} />
-      <nav>
-        <a
-          href="https://github.com/Erik-Martus/colorfi"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <img src={ghIcon} alt="GitHub" />
-        </a>
-      </nav>
+    <header className="mb-6 py-6 bg-white border-b-2 border-gray-900">
+      <div className="container flex items-center justify-between">
+        <Logo />
+        <nav>
+          <a
+            href="https://github.com/Erik-Martus/colorfi"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <GhIcon />
+          </a>
+        </nav>
+      </div>
     </header>
   );
 }

@@ -4,7 +4,11 @@ export default {
     public: '/',
     src: '/dist',
   },
-  plugins: ['@snowpack/plugin-postcss', '@snowpack/plugin-babel'],
+  plugins: [
+    '@snowpack/plugin-postcss',
+    '@snowpack/plugin-babel',
+    'snowpack-plugin-svgr',
+  ],
   routes: [
     /* Enable an SPA Fallback in development: */
     // {"match": "routes", "src": ".*", "dest": "/index.html"},
