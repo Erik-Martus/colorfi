@@ -1,22 +1,25 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { css } from '@emotion/react';
+import { useSelector, useDispatch } from 'react-redux';
 import Swatch from './Swatch';
-import colorThemes from '../data/themes.json';
+import { getThemes, changeTheme } from '../store/colors';
 
-function Themes({ onActiveThemeChange }) {
-  const themeItems = colorThemes.map((theme) => (
-    <article key={theme.name} className="w-96">
+function Themes() {
+  const themes = useSelector(getThemes);
+  const dispatch = useDispatch();
+  function onChange(e) {
+    dispatch(changeTheme(e.target.value));
+  }
+  const themeItems = Object.keys(themes).map((theme) => (
+    <article key={themes[theme].name} className="w-96">
       <input
         type="radio"
-        id={theme.name}
+        id={themes[theme].name}
         name="colorTheme"
-        value={theme.name}
-        onChange={onActiveThemeChange}
+        value={themes[theme].name}
+        onChange={onChange}
       />
-      <label htmlFor={theme.name}>
-        <Swatch colors={theme.colors} />
-        <strong>{theme.name}</strong>
+      <label htmlFor={themes[theme].name}>
+        <Swatch colors={Object.values(themes[theme].colors)} />
+        <strong>{themes[theme].name}</strong>
       </label>
     </article>
   ));
@@ -28,10 +31,5 @@ function Themes({ onActiveThemeChange }) {
     </article>
   );
 }
-
-Themes.propTypes = {
-  activeTheme: PropTypes.string,
-  onActiveThemeChange: PropTypes.func,
-};
 
 export default Themes;

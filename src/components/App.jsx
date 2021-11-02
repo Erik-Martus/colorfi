@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import chroma from 'chroma-js';
-import colorThemes from '../data/themes.json';
 import Header from './Header.jsx';
 import Intro from './Intro';
 import Footer from './Footer.jsx';
-import Themes from './Themes.jsx';
 import ThemeBuilder from './ThemeBuilder.jsx';
 import CodeOutput from './CodeOutput.jsx';
 
@@ -17,55 +16,22 @@ const cid = () => {
 const genHex = () => chroma.random().hex().toUpperCase();
 
 function App() {
-  const initTheme = (size = 5) => {
-    let theme = Array(size);
-    for (let i = 0; i < size; i++) {
-      const name =
-        i === 0
-          ? 'Primary'
-          : i === 1
-          ? 'Secondary'
-          : i === 2
-          ? 'Tertiary'
-          : i === 3
-          ? 'Quaternary'
-          : i === 4
-          ? 'Quinary'
-          : `Color${i++}`;
-      theme[i] = {
-        id: cid(),
-        name: name,
-        hex: genHex(),
-        enableShades: false,
-        shades: [],
-      };
-    }
-    return theme;
-  };
+  const colors = useSelector((state) => state.theme.colors);
 
-  const [activeTheme, setActiveTheme] = useState('');
-  const [themeColors, setThemeColors] = useState(initTheme());
+  const setColors = () => {};
+
   const [colorCount, setColorCount] = useState(5);
 
-  const findThemeColor = (key, value) => {
-    let index = themeColors.findIndex((obj) => obj[key] === value);
+  const findColor = (key, value) => {
+    let index = colors.findIndex((obj) => obj[key] === value);
     return index;
   };
 
-  const handleThemeChange = (event) => {
-    setActiveTheme(event.target.value);
-    let themeIndex = colorThemes.findIndex(
-      (obj) => obj.name === event.target.value
-    );
-    let newThemeColors = colorThemes[themeIndex].colors;
-    setThemeColors(...[newThemeColors]);
-  };
-
-  const handleThemeColorAdd = () => {
+  const handleColorAdd = () => {
     let hexColor = genHex();
     let colorName = `Color${colorCount + 1}`;
-    setThemeColors((oldThemeColors) => [
-      ...oldThemeColors,
+    setColors((oldColors) => [
+      ...oldColors,
       {
         id: cid(),
         name: colorName,
@@ -78,25 +44,25 @@ function App() {
     setColorCount((currentCount) => currentCount + 1);
   };
 
-  const handleThemeColorRemove = (id) => {
-    setThemeColors((oldThemeColors) => {
-      return oldThemeColors.filter((color) => color.id !== id);
+  const handleColorRemove = (id) => {
+    setColors((oldColors) => {
+      return oldColors.filter((color) => color.id !== id);
     });
   };
 
   const handleColorChange = (colorData) => {
     let updatedColor = colorData;
-    let colorIndex = findThemeColor('id', colorData.id);
+    // let colorIndex = findColor('id', colorData.id);
     setTimeout(
-      setThemeColors((oldThemeColors) => {
-        let newThemeColors = oldThemeColors.map((color, index) => {
+      setColors((oldColors) => {
+        let newColors = oldColors.map((color, index) => {
           if (index === colorIndex) {
             return updatedColor;
           } else {
             return color;
           }
         });
-        return newThemeColors;
+        return newColors;
       }),
       200
     );
@@ -106,18 +72,14 @@ function App() {
     <div className="App relative font-sans bg-gray-100">
       <Header />
       <main className="container bg-white pt-6 px-4 pb-8 rounded-xl border-2 border-gray-900">
-        {/* <Themes
-          activeTheme={activeTheme}
-          onActiveThemeChange={handleThemeChange}
-        /> */}
         <Intro />
         <ThemeBuilder
-          themeColors={themeColors}
-          onThemeColorAdd={handleThemeColorAdd}
-          onThemeColorRemove={handleThemeColorRemove}
+          themeColors={colors}
+          onThemeColorAdd={handleColorAdd}
+          onThemeColorRemove={handleColorRemove}
           onThemeColorChange={handleColorChange}
         />
-        <CodeOutput themeColors={themeColors} />
+        <CodeOutput themeColors={colors} />
       </main>
       <Footer />
     </div>

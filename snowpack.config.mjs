@@ -29,6 +29,7 @@ export default {
       'prismjs/components/prism-scss',
       'prismjs/components/prism-sass',
       'prismjs/components/prism-less',
+      'react-is',
     ],
   },
   devOptions: {

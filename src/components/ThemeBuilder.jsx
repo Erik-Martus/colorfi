@@ -1,19 +1,20 @@
-import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import ColorController from './ColorController';
+import { getColors, addColor } from '../store/colors';
 
-function ThemeBuilder({
-  themeColors,
-  onThemeColorAdd,
-  onThemeColorChange,
-  onThemeColorRemove,
-}) {
-  const colorItems = themeColors.map((color) => (
+function ThemeBuilder({ onThemeColorChange }) {
+  const colors = useSelector(getColors);
+  const dispatch = useDispatch();
+  function onAdd() {
+    dispatch(addColor());
+  }
+
+  const colorItems = Object.keys(colors).map((color) => (
     <ColorController
-      key={color.id}
-      color={color}
+      key={colors[color].id}
+      color={colors[color]}
       onThemeColorChange={onThemeColorChange}
-      onThemeColorRemove={onThemeColorRemove}
     />
   ));
   return (
@@ -21,7 +22,7 @@ function ThemeBuilder({
       <h2>Colors</h2>
       <div className="flex gap-6 flex-wrap">
         {colorItems}
-        <button type="button" onClick={onThemeColorAdd}>
+        <button type="button" onClick={onAdd}>
           Add
         </button>
       </div>

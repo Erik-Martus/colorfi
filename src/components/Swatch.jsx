@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 function Swatch({ colors }) {
   return (
     <div className="flex">
-      {colors.map((color) => {
+      {colors.map((color, index) => {
         return (
           <span
-            key={color.id}
+            key={`color-${index}`}
             className="flex-grow h-24"
             style={{ backgroundColor: color.hex }}
           ></span>

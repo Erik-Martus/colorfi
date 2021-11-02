@@ -1,19 +1,18 @@
-import React, { useState, useEffect } from 'react';
 import CodeHighlight from './CodeHighlight.jsx';
+import { useSelector } from 'react-redux';
+import { getColors } from '../store/colors';
 
-function CodeOutput({ themeColors }) {
-  const [colors, setColors] = useState(themeColors);
-
-  useEffect(() => {
-    setColors(themeColors);
-  }, [themeColors]);
+function CodeOutput() {
+  const colors = useSelector(getColors);
 
   const catName = (name) => name.toLowerCase().replaceAll(' ', '-');
 
-  const cssSyntax = `:root {${colors.map((color) => {
-    let varDecl = color.enableShade
-      ? color.shades.map((shade, index) => {
-          let shadeDecl = `--${catName(color.name)}-${shade.id}: ${shade.hex};`;
+  const cssSyntax = `:root {${Object.values(colors).map((color) => {
+    let varDecl = color.shades.enabled
+      ? color.shades.colors.map((shade, index) => {
+          let shadeDecl = `--${catName(color.name)}-${shade.name}: ${
+            shade.hex
+          };`;
           return index === 0 ? shadeDecl : `\n  ${shadeDecl}`;
         })
       : `--${catName(color.name)}: ${color.hex};`;
@@ -21,10 +20,12 @@ function CodeOutput({ themeColors }) {
   })}
 }`;
 
-  const scssSyntax = `${colors.map((color, index) => {
-    let varDecl = color.enableShade
-      ? color.shades.map((shade, index) => {
-          let shadeDecl = `\$${catName(color.name)}-${shade.id}: ${shade.hex};`;
+  const scssSyntax = `${Object.values(colors).map((color, index) => {
+    let varDecl = color.shades.enabled
+      ? color.shades.colors.map((shade, index) => {
+          let shadeDecl = `\$${catName(color.name)}-${shade.name}: ${
+            shade.hex
+          };`;
           return index === 0 ? shadeDecl : `\n${shadeDecl}`;
         })
       : `\$${catName(color.name)}: ${color.hex};`;
@@ -38,12 +39,11 @@ function CodeOutput({ themeColors }) {
   const tailwindSyntax = `module.exports = {
   theme: {
     extend: {
-      colors: {${colors.map((color) => {
-        if (color.enableShade) {
-          console.log('shadeEnabled');
-          let varDecl = `"${catName(color.name)}": {${color.shades.map(
+      colors: {${Object.values(colors).map((color) => {
+        if (color.shades.enabled) {
+          let varDecl = `"${catName(color.name)}": {${color.shades.colors.map(
             (shade) => {
-              let shadeDecl = `"${shade.id}": "${shade.hex}"`;
+              let shadeDecl = `"${shade.name}": "${shade.hex}"`;
               return `\n          ${shadeDecl}`;
             }
           )}

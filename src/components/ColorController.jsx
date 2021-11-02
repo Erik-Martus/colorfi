@@ -1,236 +1,201 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { HexColorPicker, HexColorInput } from 'react-colorful';
+import useDebouncy from 'use-debouncy/lib/effect';
 import Swatch from './Swatch';
-import calcShades from '../js/calcShades';
-import debounce from '../js/debounce';
 import TrashIcon from '../icons/trash.svg';
+import {
+  deleteColor,
+  toggleColorShades,
+  updateColorHex,
+  updateColorName,
+  updateColorShades,
+} from '../store/colors';
 
-function ColorController({ color, onThemeColorChange, onThemeColorRemove }) {
-  const [colorData, setColorData] = useState(color);
-  useEffect(() => {
-    setColorData(color);
-  }, [color]);
+function ColorController({ color }) {
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    onThemeColorChange(colorData);
-  }, [colorData]);
+  function onDelete() {
+    dispatch(deleteColor(color.id));
+  }
 
-  const [colorName, setColorName] = useState(color.name);
-  useEffect(() => {
-    setColorName(color.name);
-  }, [color]);
+  function onNameChange(e) {
+    dispatch(updateColorName(color.id, e.target.value));
+  }
 
-  const handleColorNameChange = (event) => {
-    setColorName(event.target.value);
+  const [hex, setHex] = useState(color.hex);
+  function onHexChange(e) {
+    setHex(e.toUpperCase());
+  }
+  useDebouncy(() => dispatch(updateColorHex(color.id, hex)), 200, [hex]);
+
+  function onToggleShades(e) {
+    dispatch(toggleColorShades(color.id, e.target.checked));
+  }
+
+  function onAmountChange(e) {
+    let amount = parseInt(e.target.value);
+    dispatch(
+      updateColorShades(color.id, {
+        amount: amount,
+        baseIndex: Math.round(amount / 2) - 1,
+      })
+    );
+  }
+
+  function onIndexChange(e) {
+    dispatch(
+      updateColorShades(color.id, { baseIndex: parseInt(e.target.value) - 1 })
+    );
+  }
+
+  function onHueChange(e) {
+    dispatch(updateColorShades(color.id, { hue: parseInt(e.target.value) }));
+  }
+
+  function onSatChange(e) {
+    dispatch(
+      updateColorShades(color.id, { saturation: parseInt(e.target.value) })
+    );
+  }
+
+  function onLightChange(e) {
+    dispatch(
+      updateColorShades(color.id, { lightness: parseInt(e.target.value) })
+    );
+  }
+
+  const formId = {
+    name: `${color.id}-name`,
+    picker: `${color.id}-hexPicker`,
+    hex: `${color.id}-hex`,
+    enableShades: `${color.id}-enableShades`,
+    amountSlider: `${color.id}-shadeAmount`,
+    positionSlider: `${color.id}-basePosition`,
+    hue: `${color.id}-hue`,
+    saturation: `${color.id}-saturation`,
+    lightness: `${color.id}-lightness`,
   };
-
-  const [pickerColor, setPickerColor] = useState(color.hex);
-  useEffect(() => {
-    setPickerColor(color.hex);
-  }, [color]);
-
-  const handlePickerChange = (event) => {
-    setPickerColor(event.toUpperCase());
-  };
-
-  const handleRemove = () => {
-    onThemeColorRemove(colorData.id);
-  };
-
-  const [enableShade, setEnableShade] = useState(false);
-  const handleShadeToggle = (event) => {
-    setEnableShade(event.target.checked);
-    if (event.target.checked === true) {
-      setShades(
-        calcShades(
-          colorData.hex,
-          shadeAmount,
-          shadePosition,
-          hueAmount,
-          saturationAmount,
-          lightnessAmount
-        )
-      );
-    }
-  };
-
-  const [shadeAmount, setShadeAmount] = useState(9);
-  const handleShadeAmountChange = (event) => {
-    setShadeAmount(event.target.value);
-    setShadePosition(Math.round(event.target.value / 2));
-  };
-
-  const [shadePosition, setShadePosition] = useState(5);
-  const handleShadePositionChange = (event) => {
-    setShadePosition(parseInt(event.target.value));
-  };
-
-  const [hueAmount, setHueAmount] = useState(0);
-  const handleHueChange = (event) => {
-    setHueAmount(event.target.value);
-  };
-
-  const [saturationAmount, setSaturationAmount] = useState(0);
-  const handleSaturationChange = (event) => {
-    setSaturationAmount(event.target.value);
-  };
-
-  const [lightnessAmount, setLightnessAmount] = useState(5);
-  const handleLightnessChange = (event) => {
-    setLightnessAmount(event.target.value);
-  };
-
-  const [shades, setShades] = useState([]);
-  useEffect(() => {
-    if (enableShade === true) {
-      setShades(
-        calcShades(
-          pickerColor,
-          shadeAmount,
-          shadePosition,
-          hueAmount,
-          saturationAmount,
-          lightnessAmount
-        )
-      );
-    }
-  }, [
-    pickerColor,
-    shadeAmount,
-    shadePosition,
-    hueAmount,
-    saturationAmount,
-    lightnessAmount,
-  ]);
-
-  useEffect(() => {
-    let newColorData = colorData;
-    newColorData.name = colorName;
-    newColorData.hex = pickerColor;
-    newColorData.enableShade = enableShade;
-    newColorData.shades = shades;
-    setColorData(newColorData);
-    onThemeColorChange(newColorData);
-  }, [colorName, pickerColor, enableShade, shades]);
 
   return (
     <div className="w-96">
-      <Swatch colors={enableShade ? shades : [colorData]} />
-      <strong>{colorName ? colorName : 'Color Name'}</strong>
-      <button role="button" onClick={handleRemove}>
-        <TrashIcon />
-      </button>
+      <div className="relative group">
+        <Swatch colors={color.shades.enabled ? color.shades.colors : [color]} />
+        <p>
+          <strong>{color.name ? color.name : 'Color'}</strong>
+        </p>
+        <button
+          role="button"
+          onClick={onDelete}
+          className="absolute top-3 right-3 opacity-0 group-hover:opacity-100"
+        >
+          <TrashIcon />
+        </button>
+      </div>
       <div>
         <div className="form-control">
-          <label htmlFor={`colorName-${colorData.id}`}>Color Name:</label>
+          <label htmlFor={formId.name}>Color Name:</label>
           <input
-            id={`colorName-${colorData.id}`}
             type="text"
-            value={colorName}
-            onChange={handleColorNameChange}
+            id={formId.name}
+            value={color.name}
+            onChange={onNameChange}
           />
         </div>
         <div className="form-control">
           <HexColorPicker
-            id={`colorPicker-${colorData.id}`}
-            color={pickerColor}
-            onChange={handlePickerChange}
+            id={formId.picker}
+            color={hex}
+            onChange={onHexChange}
           />
           <HexColorInput
-            id={`colorInput-${colorData.id}`}
-            color={pickerColor}
+            id={formId.hex}
+            color={hex}
+            onChange={onHexChange}
             prefixed={true}
-            onChange={handlePickerChange}
           />
         </div>
         <div className="form-control">
-          <label htmlFor={`shadeToggle-${colorData.id}`}>Enable Shades:</label>
+          <label htmlFor={formId.enableShades}>Enable Shades:</label>
           <input
-            id={`shadeToggle-${colorData.id}`}
             type="checkbox"
-            checked={enableShade}
-            onChange={handleShadeToggle}
+            checked={color.shades.enabled}
+            onChange={onToggleShades}
           />
         </div>
-        <fieldset disabled={enableShade ? false : true}>
+        <fieldset disabled={!color.shades.enabled}>
           <legend>Customize Shades:</legend>
-          <div className="form-control">
-            <label htmlFor={`shadeSlider-${colorData.id}`}>
-              Number of Shades:
-            </label>
+          <fieldset className="form-control">
+            <legend htmlFor={formId.amountSlider}>Number of Shades:</legend>
             <input
-              id={`shadeSlider-${colorData.id}`}
+              id={formId.amountSlider}
               type="range"
-              value={shadeAmount}
+              value={color.shades.amount}
               min="1"
               max="9"
-              onChange={handleShadeAmountChange}
+              onChange={onAmountChange}
             />
             <input
               type="number"
-              value={shadeAmount}
+              value={color.shades.amount}
               min="1"
               max="9"
-              onChange={handleShadeAmountChange}
+              onChange={onAmountChange}
             />
-          </div>
-          <div className="form-control">
-            <label htmlFor={`shadePos-${colorData.id}`}>
+          </fieldset>
+          <fieldset className="form-control">
+            <legend htmlFor={formId.positionSlider}>
               Base Color Position:
-            </label>
+            </legend>
             <input
-              id={`shadePos-${colorData.id}`}
+              id={formId.positionSlider}
               type="range"
-              value={shadePosition}
+              value={color.shades.baseIndex + 1}
               min="1"
-              max={shadeAmount}
-              onChange={handleShadePositionChange}
+              max={color.shades.amount}
+              onChange={onIndexChange}
             />
             <input
               type="number"
-              value={shadePosition}
+              value={color.shades.baseIndex + 1}
               min="1"
-              max={shadeAmount}
-              onChange={handleShadePositionChange}
+              max={color.shades.amount}
+              onChange={onIndexChange}
             />
-          </div>
+          </fieldset>
           <fieldset>
             <legend>HSL Adjustment:</legend>
             <div className="form-control">
-              <label htmlFor={`hueAdjust-${colorData.id}`}>Hue:</label>
+              <label htmlFor={formId.hue}>Hue:</label>
               <input
-                id={`hueAdjust-${colorData.id}`}
+                id={formId.hue}
                 type="number"
-                value={hueAmount}
+                value={color.shades.hue}
                 min="0"
                 max="360"
-                onChange={handleHueChange}
+                onChange={onHueChange}
               />
             </div>
             <div className="form-control">
-              <label htmlFor={`saturationAdjust-${colorData.id}`}>
-                Saturation:
-              </label>
+              <label htmlFor={formId.saturation}>Saturation:</label>
               <input
-                id={`saturationAdjust-${colorData.id}`}
+                id={formId.saturation}
                 type="number"
-                value={saturationAmount}
+                value={color.shades.saturation}
                 min="0"
                 max="100"
-                onChange={handleSaturationChange}
+                onChange={onSatChange}
               />
             </div>
             <div className="form-control">
-              <label htmlFor={`lightnessAdjust-${colorData.id}`}>
-                Lightness:
-              </label>
+              <label htmlFor={formId.lightness}>Lightness:</label>
               <input
-                id={`lightnessAdjust-${colorData.id}`}
+                id={formId.lightness}
                 type="number"
-                value={lightnessAmount}
+                value={color.shades.lightness}
                 min="0"
                 max="100"
-                onChange={handleLightnessChange}
+                onChange={onLightChange}
               />
             </div>
           </fieldset>
