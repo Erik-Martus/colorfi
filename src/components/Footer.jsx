@@ -3,7 +3,7 @@ import HeartOutline from '../icons/heart-outline.svg';
 
 function Footer() {
   return (
-    <footer className="mt-8 py-10 font-light bg-gray-800 text-white">
+    <footer className="mt-8 py-10 font-light bg-indigo-900 text-white">
       <div className="container flex justify-center">
         <a href="https://emartus.dev" target="_blank" rel="noreferrer">
           Made with{' '}

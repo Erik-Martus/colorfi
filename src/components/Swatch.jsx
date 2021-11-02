@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 function Swatch({ colors }) {
   return (
-    <div className="flex">
+    <div className="flex w-full rounded-xl overflow-hidden">
       {colors.map((color, index) => {
         return (
           <span

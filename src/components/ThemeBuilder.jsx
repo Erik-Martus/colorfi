@@ -18,7 +18,7 @@ function ThemeBuilder({ onThemeColorChange }) {
     />
   ));
   return (
-    <article>
+    <article id="colors" className="pt-3">
       <h2>Colors</h2>
       <div className="flex gap-6 flex-wrap">
         {colorItems}

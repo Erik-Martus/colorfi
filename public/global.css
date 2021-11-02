@@ -3,8 +3,16 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply text-gray-900;
+  }
+
   h1 {
-    @apply text-4xl text-center font-extrabold my-8;
+    @apply text-center text-4xl font-extrabold my-8;
   }
 
   h2 {

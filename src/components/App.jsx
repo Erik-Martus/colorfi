@@ -69,17 +69,19 @@ function App() {
   };
 
   return (
-    <div className="App relative font-sans bg-gray-100">
+    <div className="App w-screen relative font-sans bg-gray-100">
       <Header />
-      <main className="container bg-white pt-6 px-4 pb-8 rounded-xl border-2 border-gray-900">
-        <Intro />
-        <ThemeBuilder
-          themeColors={colors}
-          onThemeColorAdd={handleColorAdd}
-          onThemeColorRemove={handleColorRemove}
-          onThemeColorChange={handleColorChange}
-        />
-        <CodeOutput themeColors={colors} />
+      <main className="container">
+        <div className="bg-white pt-6 px-4 pb-8 rounded-xl shadow-xl">
+          <Intro />
+          <ThemeBuilder
+            themeColors={colors}
+            onThemeColorAdd={handleColorAdd}
+            onThemeColorRemove={handleColorRemove}
+            onThemeColorChange={handleColorChange}
+          />
+          <CodeOutput themeColors={colors} />
+        </div>
       </main>
       <Footer />
     </div>
