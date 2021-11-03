@@ -1,24 +1,7 @@
-import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import CloseIcon from '../icons/close.svg';
 
 function Modal({ name, hiddenState, handleHiddenState, children }) {
-  const [scrollPos, setScrollPos] = useState(0);
-  useEffect(() => {
-    setScrollPos(document.body.style.top);
-  }, [hiddenState]);
-
-  if (hiddenState) {
-    const scrollY = scrollPos;
-    document.body.classList.remove('noScroll');
-    document.body.style.position = 'relative';
-    document.body.style.top = '';
-    window.scrollTo(0, parseInt(scrollY || '0') * -1);
-  } else if (!hiddenState) {
-    document.body.classList.add('noScroll');
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${window.scrollY}px`;
-  }
   return (
     <article
       id={`modal-${name}`}
