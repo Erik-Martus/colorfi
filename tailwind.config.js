@@ -8,10 +8,17 @@ module.exports = {
     fontFamily: {
       sans: ['inter', ...defaultTheme.fontFamily.sans],
     },
+    extend: {
+      transitionProperty: {
+        sizing: 'height, width',
+      },
+    },
   },
   variants: {
     extend: {
       backgroundColor: ['checked'],
+      borderColor: ['hocus'],
     },
   },
+  plugins: [require('tailwindcss-interaction-variants')],
 };

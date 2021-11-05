@@ -1,9 +1,8 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 
-function Swatch({ colors }) {
+function Swatch({ colors, className = '' }) {
   return (
-    <div className="flex w-full rounded-xl overflow-hidden">
+    <div className={`flex w-full rounded-xl overflow-hidden ${className}`}>
       {colors.map((color, index) => {
         return (
           <span
@@ -19,6 +18,7 @@ function Swatch({ colors }) {
 
 Swatch.propTypes = {
   colors: PropTypes.array.isRequired,
+  className: PropTypes.string,
 };
 
 export default Swatch;

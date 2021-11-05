@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import ColorController from './ColorController';
+import ColorItem from './ColorItem';
 import { getColors, addColor } from '../store/colors';
 
 function ThemeBuilder({ onThemeColorChange }) {
@@ -11,7 +11,7 @@ function ThemeBuilder({ onThemeColorChange }) {
   }
 
   const colorItems = Object.keys(colors).map((color) => (
-    <ColorController
+    <ColorItem
       key={colors[color].id}
       color={colors[color]}
       onThemeColorChange={onThemeColorChange}

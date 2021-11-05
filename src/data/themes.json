@@ -10,6 +10,9 @@
           "enabled": false,
           "amount": 9,
           "baseIndex": 4,
+          "hue": 0,
+          "saturation": 0,
+          "lightness": 5,
           "colors": [
             {
               "name": "100",
@@ -58,6 +61,9 @@
           "enabled": false,
           "amount": 9,
           "baseIndex": 4,
+          "hue": 0,
+          "saturation": 0,
+          "lightness": 5,
           "colors": [
             {
               "name": "100",
@@ -106,6 +112,9 @@
           "enabled": false,
           "amount": 9,
           "baseIndex": 4,
+          "hue": 0,
+          "saturation": 0,
+          "lightness": 5,
           "colors": [
             {
               "name": "100",
@@ -154,6 +163,9 @@
           "enabled": false,
           "amount": 9,
           "baseIndex": 4,
+          "hue": 0,
+          "saturation": 0,
+          "lightness": 5,
           "colors": [
             {
               "name": "100",
@@ -202,6 +214,9 @@
           "enabled": false,
           "amount": 9,
           "baseIndex": 4,
+          "hue": 0,
+          "saturation": 0,
+          "lightness": 5,
           "colors": [
             {
               "name": "100",
@@ -255,6 +270,9 @@
           "enabled": false,
           "amount": 9,
           "baseIndex": 4,
+          "hue": 0,
+          "saturation": 0,
+          "lightness": 5,
           "colors": [
             {
               "name": "100",
@@ -303,6 +321,9 @@
           "enabled": false,
           "amount": 9,
           "baseIndex": 4,
+          "hue": 0,
+          "saturation": 0,
+          "lightness": 5,
           "colors": [
             {
               "name": "100",
@@ -351,6 +372,9 @@
           "enabled": false,
           "amount": 9,
           "baseIndex": 4,
+          "hue": 0,
+          "saturation": 0,
+          "lightness": 5,
           "colors": [
             {
               "name": "100",
@@ -399,6 +423,9 @@
           "enabled": false,
           "amount": 9,
           "baseIndex": 4,
+          "hue": 0,
+          "saturation": 0,
+          "lightness": 5,
           "colors": [
             {
               "name": "100",
@@ -447,6 +474,9 @@
           "enabled": false,
           "amount": 9,
           "baseIndex": 4,
+          "hue": 0,
+          "saturation": 0,
+          "lightness": 5,
           "colors": [
             {
               "name": "100",

@@ -10,7 +10,9 @@ function Intro() {
   return (
     <section id="intro" className="flex flex-col items-center mb-12">
       <h1>Create Code Ready Color Themes</h1>
-      <Button onClick={() => setHiddenState(false)}>Choose a Theme</Button>
+      <Button type="primary" onClick={() => setHiddenState(false)}>
+        Choose a Theme
+      </Button>
       <p className="mb-3 text-center text-xl font-semibold">
         Or get started below
       </p>
@@ -18,14 +20,9 @@ function Intro() {
         <ArrowDown className="animate-bounce text-gray-600 w-12" />
       </a>
       <Modal
-        name="themes"
-        hiddenState={hiddenState}
-        handleHiddenState={() =>
-          setHiddenState((currentState) => {
-            let newState = !currentState;
-            return newState;
-          })
-        }
+        title="Themes"
+        hidden={hiddenState}
+        handleHidden={() => setHiddenState((state) => !state)}
       >
         <Themes />
       </Modal>
