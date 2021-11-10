@@ -17,7 +17,7 @@ module.exports = {
   variants: {
     extend: {
       backgroundColor: ['checked'],
-      borderColor: ['hocus'],
+      borderColor: ['hocus, group-hocus'],
     },
   },
   plugins: [require('tailwindcss-interaction-variants')],

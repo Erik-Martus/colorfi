@@ -99,13 +99,18 @@ export function themeReducer(state = initialState, action) {
         },
       };
     case COLOR_SHADES_UPDATED: {
+      console.log(action.payload);
       const color = state.colors[action.payload.id];
       const props = Object.keys(action.payload.value);
       const values = Object.values(action.payload.value);
       props.map((prop, index) => {
         color.shades[prop] = values[index];
       });
-      color.shades.colors = calcShades(color);
+      color.shades.colors = calcShades(
+        isNaN(color.shades.amount)
+          ? { ...color, shades: { ...color.shades, amount: 1, baseIndex: 1 } }
+          : color
+      );
       return {
         ...state,
         colors: {

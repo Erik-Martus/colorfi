@@ -16,7 +16,13 @@ function ColorItem({ color }) {
   return (
     <div className="w-96">
       <div className="flex flex-col gap-2">
-        <Swatch colors={color.shades.enabled ? color.shades.colors : [color]} />
+        <Swatch
+          colors={
+            color.shades.enabled && color.shades.amount !== ''
+              ? color.shades.colors
+              : [color]
+          }
+        />
         <div className="flex items-center justify-between">
           <SwatchLabel label={color.name ? color.name : 'Color Name'} />
           <div className="flex gap-2">
@@ -44,7 +50,11 @@ function ColorItem({ color }) {
         handleHidden={() => setHiddenState((state) => !state)}
         headerChildren={
           <Swatch
-            colors={color.shades.enabled ? color.shades.colors : [color]}
+            colors={
+              color.shades.enabled && color.shades.amount !== ''
+                ? color.shades.colors
+                : [color]
+            }
           />
         }
       >

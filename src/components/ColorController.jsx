@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import useDebouncy from 'use-debouncy/lib/effect';
 import { HexColorPicker, HexColorInput } from 'react-colorful';
-import Swatch from './Swatch';
+import InputNumber from './InputNumber';
 import {
   toggleColorShades,
   updateColorHex,
@@ -18,8 +18,8 @@ function ColorController({ color }) {
     picker: `${color.id}-hexPicker`,
     hex: `${color.id}-hex`,
     enableShades: `${color.id}-enableShades`,
-    amountSlider: `${color.id}-shadeAmount`,
-    positionSlider: `${color.id}-basePosition`,
+    amount: `${color.id}-shadeAmount`,
+    position: `${color.id}-basePosition`,
     hue: `${color.id}-hue`,
     saturation: `${color.id}-saturation`,
     lightness: `${color.id}-lightness`,
@@ -39,20 +39,18 @@ function ColorController({ color }) {
     dispatch(toggleColorShades(color.id, e.target.checked));
   }
 
-  function onAmountChange(e) {
-    let amount = parseInt(e.target.value);
+  function onAmountChange(amount) {
+    const num = parseInt(amount);
     dispatch(
       updateColorShades(color.id, {
-        amount: amount,
-        baseIndex: Math.round(amount / 2) - 1,
+        amount: num,
+        baseIndex: isNaN(num) ? 0 : num === 1 ? 0 : Math.round(num / 2) - 1,
       })
     );
   }
 
-  function onIndexChange(e) {
-    dispatch(
-      updateColorShades(color.id, { baseIndex: parseInt(e.target.value) - 1 })
-    );
+  function onIndexChange(amount) {
+    dispatch(updateColorShades(color.id, { baseIndex: parseInt(amount) - 1 }));
   }
 
   function onHueChange(e) {
@@ -117,88 +115,55 @@ function ColorController({ color }) {
             </span>
           </label>
         </div>
-        <div className="">
-          <fieldset
-            disabled={!color.shades.enabled}
-            className="overflow-y-hidden disabled:h-0"
-          >
-            <legend className="">Customize Shades:</legend>
-            <fieldset className="form-control">
-              <legend htmlFor={formId.amountSlider}>Number of Shades:</legend>
-              <input
-                id={formId.amountSlider}
-                type="range"
-                value={color.shades.amount}
-                min="1"
-                max="9"
-                onChange={onAmountChange}
-              />
-              <input
-                type="number"
-                value={color.shades.amount}
-                min="1"
-                max="9"
-                onChange={onAmountChange}
-              />
-            </fieldset>
-            <fieldset className="form-control">
-              <legend htmlFor={formId.positionSlider}>
-                Base Color Position:
-              </legend>
-              <input
-                id={formId.positionSlider}
-                type="range"
-                value={color.shades.baseIndex + 1}
-                min="1"
-                max={color.shades.amount}
-                onChange={onIndexChange}
-              />
-              <input
-                type="number"
-                value={color.shades.baseIndex + 1}
-                min="1"
-                max={color.shades.amount}
-                onChange={onIndexChange}
-              />
-            </fieldset>
-            <fieldset>
-              <legend>HSL Adjustment:</legend>
-              <div className="form-control">
-                <label htmlFor={formId.hue}>Hue:</label>
-                <input
-                  id={formId.hue}
-                  type="number"
-                  value={color.shades.hue}
-                  min="0"
-                  max="360"
-                  onChange={onHueChange}
-                />
-              </div>
-              <div className="form-control">
-                <label htmlFor={formId.saturation}>Saturation:</label>
-                <input
-                  id={formId.saturation}
-                  type="number"
-                  value={color.shades.saturation}
-                  min="0"
-                  max="100"
-                  onChange={onSatChange}
-                />
-              </div>
-              <div className="form-control">
-                <label htmlFor={formId.lightness}>Lightness:</label>
-                <input
-                  id={formId.lightness}
-                  type="number"
-                  value={color.shades.lightness}
-                  min="0"
-                  max="100"
-                  onChange={onLightChange}
-                />
-              </div>
-            </fieldset>
+        <fieldset
+          disabled={!color.shades.enabled}
+          className="overflow-y-hidden disabled:h-0"
+        >
+          <legend>Customize Shades:</legend>
+          <InputNumber
+            id={formId.amount}
+            label="Number of Shades:"
+            value={color.shades.amount}
+            min={1}
+            max={9}
+            onChange={onAmountChange}
+          />
+          <InputNumber
+            id={formId.position}
+            label="Base Color Position:"
+            value={color.shades.baseIndex + 1}
+            min={1}
+            max={color.shades.amount}
+            onChange={onIndexChange}
+          />
+          <fieldset>
+            <legend>HSL Adjustment:</legend>
+            <InputNumber
+              id={formId.hue}
+              label="Hue:"
+              value={color.shades.hue}
+              min={0}
+              max={360}
+              onChange={onHueChange}
+            />
+            <InputNumber
+              id={formId.saturation}
+              label="Saturation:"
+              value={color.shades.saturation}
+              min={0}
+              max={100}
+              onChange={onSatChange}
+            />
+            <InputNumber
+              id={formId.lightness}
+              label="Lightness:"
+              value={color.shades.lightness}
+              min={0}
+              max={100}
+              onChange={onLightChange}
+            />
           </fieldset>
-        </div>
+        </fieldset>
       </div>
     </>
   );
