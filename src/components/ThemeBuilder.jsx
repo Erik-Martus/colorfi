@@ -1,6 +1,8 @@
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
+import Button from './Button';
 import ColorItem from './ColorItem';
+import PlusCircle from '../icons/plus-circle.svg';
 import { getColors, addColor } from '../store/colors';
 
 function ThemeBuilder() {
@@ -14,15 +16,16 @@ function ThemeBuilder() {
     <ColorItem key={colors[color].id} color={colors[color]} />
   ));
   return (
-    <article id="colors" className="pt-3">
+    <section id="colors" className="mb-8 pt-3">
       <h2>Colors</h2>
       <div className="flex gap-6 flex-wrap">
         {colorItems}
-        <button type="button" onClick={onAdd}>
-          Add
-        </button>
+        <Button type="icon" className="!w-96 h-24" onClick={onAdd}>
+          <PlusCircle />
+          <span className="sr-only">Add</span>
+        </Button>
       </div>
-    </article>
+    </section>
   );
 }
 
