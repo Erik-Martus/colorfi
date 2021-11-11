@@ -1,6 +1,16 @@
+import PropTypes from 'prop-types';
 import Minus from '../icons/minus.svg';
 import Plus from '../icons/plus.svg';
-function InputNumber({ id, label, value, min, max, onChange }) {
+
+function InputNumber({
+  id,
+  label,
+  value = 0,
+  min = 0,
+  max = 10,
+  onChange,
+  onStep,
+}) {
   const elId = id ? id : label.toLowerCase().replace(' ', '-');
   return (
     <div className="form-control">
@@ -41,5 +51,15 @@ function InputNumber({ id, label, value, min, max, onChange }) {
     </div>
   );
 }
+
+InputNumber.propTypes = {
+  id: PropTypes.string,
+  label: PropTypes.string.isRequired,
+  value: PropTypes.number,
+  min: PropTypes.number,
+  max: PropTypes.number,
+  onChange: PropTypes.func.isRequired,
+  onStep: PropTypes.func,
+};
 
 export default InputNumber;

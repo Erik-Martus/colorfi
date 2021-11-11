@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ColorItem from './ColorItem';
 import { getColors, addColor } from '../store/colors';
 
-function ThemeBuilder({ onThemeColorChange }) {
+function ThemeBuilder() {
   const colors = useSelector(getColors);
   const dispatch = useDispatch();
   function onAdd() {
@@ -11,11 +11,7 @@ function ThemeBuilder({ onThemeColorChange }) {
   }
 
   const colorItems = Object.keys(colors).map((color) => (
-    <ColorItem
-      key={colors[color].id}
-      color={colors[color]}
-      onThemeColorChange={onThemeColorChange}
-    />
+    <ColorItem key={colors[color].id} color={colors[color]} />
   ));
   return (
     <article id="colors" className="pt-3">

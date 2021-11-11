@@ -1,5 +1,5 @@
 import themeLib from '../data/themes.json';
-import { genColorId, genHex, initColors, calcShades } from '../js/colorFuncs';
+import { genColorId, genHex, initColors, genShades } from '../js/colorFuncs';
 
 const initialCount = 5;
 
@@ -19,22 +19,6 @@ export function themeReducer(state = initialState, action) {
     case COLOR_ADDED: {
       const id = genColorId();
       const name = `Color${state.colorCount}`;
-      const hex = genHex();
-      const amount = 9;
-      const baseIndex = 4;
-      const hue = 0;
-      const sat = 0;
-      const light = 5;
-      const shades = calcShades({
-        hex: hex,
-        shades: {
-          amount: amount,
-          baseIndex: baseIndex,
-          hue: hue,
-          saturation: sat,
-          lightness: light,
-        },
-      });
       return {
         ...state,
         colors: {
@@ -43,15 +27,7 @@ export function themeReducer(state = initialState, action) {
             id: id,
             name: name,
             hex: genHex(),
-            shades: {
-              enabled: false,
-              amount: amount,
-              baseIndex: baseIndex,
-              hue: hue,
-              saturation: sat,
-              lightness: light,
-              colors: shades,
-            },
+            shades: false,
           },
         },
         colorCount: state.colorCount + 1,
@@ -72,18 +48,17 @@ export function themeReducer(state = initialState, action) {
           },
         },
       };
-    case COLOR_HEX_UPDATED: {
-      const color = state.colors[action.payload.id];
-      color.hex = action.payload.value;
-      color.shades.colors = calcShades(color);
+    case COLOR_HEX_UPDATED:
       return {
         ...state,
         colors: {
           ...state.colors,
-          [action.payload.id]: color,
+          [action.payload.id]: {
+            ...state.colors[action.payload.id],
+            hex: action.payload.value,
+          },
         },
       };
-    }
     case COLOR_SHADES_TOGGLED:
       return {
         ...state,
@@ -106,11 +81,26 @@ export function themeReducer(state = initialState, action) {
       props.map((prop, index) => {
         color.shades[prop] = values[index];
       });
-      color.shades.colors = calcShades(
+      color.shades.colors = genShades(
         isNaN(color.shades.amount)
           ? { ...color, shades: { ...color.shades, amount: 1, baseIndex: 1 } }
           : color
       );
+      return {
+        ...state,
+        colors: {
+          ...state.colors,
+          [action.payload.id]: color,
+        },
+      };
+    }
+    case COLOR_UPDATED: {
+      const color = state.colors[action.payload.id];
+      const props = Object.keys(action.payload.value);
+      const values = Object.values(action.payload.value);
+      props.map((prop, index) => {
+        color[prop] = values[index];
+      });
       return {
         ...state,
         colors: {
@@ -125,14 +115,14 @@ export function themeReducer(state = initialState, action) {
 }
 
 // selectors
-export const getColors = (state) => state.theme.colors;
-export const getColorCount = (state) => state.theme.colorCount;
-export const getThemes = (state) => state.theme.themes;
+export const getColors = (state) => state.colors;
+export const getThemes = (state) => state.themes;
 
 // action types
 export const THEME_CHANGED = 'theme/themeChange';
 export const COLOR_ADDED = 'theme/colorAdd';
 export const COLOR_DELETED = 'theme/colorDelete';
+export const COLOR_UPDATED = 'theme/colorUpdate';
 export const COLOR_NAME_UPDATED = 'theme/colorNameUpdated';
 export const COLOR_HEX_UPDATED = 'theme/colorHexUpdated';
 export const COLOR_SHADES_TOGGLED = 'theme/colorShadesToggled';
@@ -155,6 +145,11 @@ export const deleteColor = (id) => ({
 
 export const updateColorName = (id, value) => ({
   type: COLOR_NAME_UPDATED,
+  payload: { id, value },
+});
+
+export const updateColor = (id, value) => ({
+  type: COLOR_UPDATED,
   payload: { id, value },
 });
 

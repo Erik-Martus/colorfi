@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Button from './Button';
 import ColorController from './ColorController';
@@ -13,31 +13,21 @@ function ColorItem({ color }) {
   const dispatch = useDispatch();
   const [hiddenState, setHiddenState] = useState(true);
 
+  const handleEdit = () => setHiddenState(false);
+  const handleDelete = (e) => dispatch(deleteColor(color.id));
+  const handleHidden = () => setHiddenState((state) => !state);
+
   return (
     <div className="w-96">
       <div className="flex flex-col gap-2">
-        <Swatch
-          colors={
-            color.shades.enabled && color.shades.amount !== ''
-              ? color.shades.colors
-              : [color]
-          }
-        />
+        <Swatch colors={color.shades ? color.shades : [color]} />
         <div className="flex items-center justify-between">
           <SwatchLabel label={color.name ? color.name : 'Color Name'} />
           <div className="flex gap-2">
-            <Button
-              type="icon"
-              className="mb-0"
-              onClick={() => setHiddenState(false)}
-            >
+            <Button type="icon" className="mb-0" onClick={handleEdit}>
               <EditIcon />
             </Button>
-            <Button
-              type="icon"
-              className="mb-0"
-              onClick={(e) => dispatch(deleteColor(color.id))}
-            >
+            <Button type="icon" className="mb-0" onClick={handleDelete}>
               <TrashIcon />
             </Button>
           </div>
@@ -47,16 +37,7 @@ function ColorItem({ color }) {
         title="Color Editor"
         id={`controller-${color.id}`}
         hidden={hiddenState}
-        handleHidden={() => setHiddenState((state) => !state)}
-        headerChildren={
-          <Swatch
-            colors={
-              color.shades.enabled && color.shades.amount !== ''
-                ? color.shades.colors
-                : [color]
-            }
-          />
-        }
+        handleHidden={handleHidden}
       >
         <ColorController color={color} />
       </Modal>

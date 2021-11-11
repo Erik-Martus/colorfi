@@ -3,15 +3,21 @@ import { useDispatch } from 'react-redux';
 import useDebouncy from 'use-debouncy/lib/effect';
 import { HexColorPicker, HexColorInput } from 'react-colorful';
 import InputNumber from './InputNumber';
-import {
-  toggleColorShades,
-  updateColorHex,
-  updateColorName,
-  updateColorShades,
-} from '../store/colors';
+import InputToggle from './InputToggle';
+import Swatch from './Swatch';
+import { updateColor } from '../store/colors';
+import { genShades } from '../js/colorFuncs';
 
 function ColorController({ color }) {
   const dispatch = useDispatch();
+  const [hex, setHex] = useState(color.hex);
+  const [enableShades, setEnableShades] = useState(false);
+  const [shadeAmount, setShadeAmount] = useState(9);
+  const [basePos, setBasePos] = useState(5);
+  const [hue, setHue] = useState(0);
+  const [sat, setSat] = useState(0);
+  const [light, setLight] = useState(5);
+  const [shades, setShades] = useState(false);
 
   const formId = {
     name: `${color.id}-name`,
@@ -25,60 +31,89 @@ function ColorController({ color }) {
     lightness: `${color.id}-lightness`,
   };
 
-  function onNameChange(e) {
-    dispatch(updateColorName(color.id, e.target.value));
-  }
+  const updateShades = (shades) => {
+    setShades(shades);
+    dispatch(updateColor(color.id, { shades }));
+  };
 
-  const [hex, setHex] = useState(color.hex);
-  function onHexChange(e) {
+  const handleNameChange = (e) => {
+    dispatch(updateColor(color.id, { name: e.target.value }));
+  };
+
+  const handleHexChange = (e) => {
     setHex(e.toUpperCase());
-  }
-  useDebouncy(() => dispatch(updateColorHex(color.id, hex)), 200, [hex]);
+    if (enableShades) {
+      setShades(
+        genShades(e.toUpperCase(), shadeAmount, basePos, hue, sat, light)
+      );
+    }
+  };
+  useDebouncy(() => dispatch(updateColor(color.id, { hex, shades })), 100, [
+    hex,
+  ]);
 
-  function onToggleShades(e) {
-    dispatch(toggleColorShades(color.id, e.target.checked));
-  }
-
-  function onAmountChange(amount) {
-    const num = parseInt(amount);
-    dispatch(
-      updateColorShades(color.id, {
-        amount: num,
-        baseIndex: isNaN(num) ? 0 : num === 1 ? 0 : Math.round(num / 2) - 1,
-      })
+  const handleToggleShades = (e) => {
+    setEnableShades(e.target.checked);
+    updateShades(
+      e.target.checked
+        ? genShades(hex, shadeAmount, basePos, hue, sat, light)
+        : false
     );
-  }
+  };
 
-  function onIndexChange(amount) {
-    dispatch(updateColorShades(color.id, { baseIndex: parseInt(amount) - 1 }));
-  }
-
-  function onHueChange(e) {
-    dispatch(updateColorShades(color.id, { hue: parseInt(e.target.value) }));
-  }
-
-  function onSatChange(e) {
-    dispatch(
-      updateColorShades(color.id, { saturation: parseInt(e.target.value) })
+  const handleAmountChange = (value) => {
+    const amount = parseInt(value);
+    const pos = isNaN(amount) ? 1 : amount === 1 ? 1 : Math.round(amount / 2);
+    setShadeAmount(amount);
+    setBasePos(pos);
+    updateShades(
+      genShades(hex, isNaN(amount) ? 1 : amount, pos, hue, sat, light)
     );
-  }
+  };
 
-  function onLightChange(e) {
-    dispatch(
-      updateColorShades(color.id, { lightness: parseInt(e.target.value) })
+  const handlePosChange = (value) => {
+    const pos = parseInt(value);
+    setBasePos(pos);
+    updateShades(
+      genShades(hex, shadeAmount, isNaN(pos) ? 1 : pos, hue, sat, light)
     );
-  }
+  };
+
+  const handleHueChange = (value) => {
+    const h = parseInt(value);
+    setHue(h);
+    updateShades(
+      genShades(hex, shadeAmount, basePos, isNaN(h) ? 0 : h, sat, light)
+    );
+  };
+
+  const handleSatChange = (value) => {
+    const s = parseInt(value);
+    setSat(s);
+    updateShades(
+      genShades(hex, shadeAmount, basePos, hue, isNaN(s) ? 0 : s, light)
+    );
+  };
+
+  const handleLightChange = (value) => {
+    const l = parseInt(value);
+    setLight(l);
+    updateShades(
+      genShades(hex, shadeAmount, basePos, hue, sat, isNaN(l) ? 0 : l)
+    );
+  };
 
   return (
     <>
       <div className="flex-auto overflow-y-scroll p-1">
+        <Swatch colors={shades ? shades : [{ hex }]} />
         <div className="form-control">
           <label htmlFor={formId.name}>Color Name:</label>
           <input
             type="text"
             id={formId.name}
             value={color.name}
-            onChange={onNameChange}
+            onChange={handleNameChange}
           />
         </div>
         <div className="form-control">
@@ -86,81 +121,68 @@ function ColorController({ color }) {
             id={formId.picker}
             className="color-picker"
             color={hex}
-            onChange={onHexChange}
+            onChange={handleHexChange}
           />
           <HexColorInput
             id={formId.hex}
             type="text"
             color={hex}
-            onChange={onHexChange}
+            onChange={handleHexChange}
             prefixed={true}
           />
         </div>
-        <div className="form-control">
-          <label
-            htmlFor={formId.enableShades}
-            className="flex items-center justify-between cursor-pointer"
-          >
-            <span>Enable Shades:</span>
-            <span className="relative">
-              <input
-                id={formId.enableShades}
-                type="checkbox"
-                checked={color.shades.enabled}
-                onChange={onToggleShades}
-                className="sr-only peer"
-              />
-              <span className="block bg-gray-200 peer-checked:bg-indigo-600 w-14 h-8 rounded-full transition-colors hocus:bg-gray-300 peer-checked:hover:bg-indigo-800 peer-checked:focus:bg-indigo-800 peer-focus:ring-2 peer-focus:ring-indigo-600 peer-focus:ring-opacity-50" />
-              <span className="absolute bg-white left-1 top-1 w-6 h-6 rounded-full transition-transform peer-checked:translate-x-full" />
-            </span>
-          </label>
-        </div>
+        <InputToggle
+          id={formId.enableShades}
+          label="Enable shades:"
+          checked={enableShades}
+          onChange={handleToggleShades}
+        />
         <fieldset
-          disabled={!color.shades.enabled}
+          disabled={!enableShades}
           className="overflow-y-hidden disabled:h-0"
         >
           <legend>Customize Shades:</legend>
           <InputNumber
             id={formId.amount}
             label="Number of Shades:"
-            value={color.shades.amount}
+            value={shadeAmount}
             min={1}
             max={9}
-            onChange={onAmountChange}
+            onChange={handleAmountChange}
           />
           <InputNumber
             id={formId.position}
             label="Base Color Position:"
-            value={color.shades.baseIndex + 1}
+            value={basePos}
             min={1}
-            max={color.shades.amount}
-            onChange={onIndexChange}
+            max={shadeAmount}
+            onChange={handlePosChange}
           />
           <fieldset>
             <legend>HSL Adjustment:</legend>
             <InputNumber
               id={formId.hue}
               label="Hue:"
-              value={color.shades.hue}
+              value={hue}
               min={0}
               max={360}
-              onChange={onHueChange}
+              onChange={handleHueChange}
             />
             <InputNumber
               id={formId.saturation}
               label="Saturation:"
-              value={color.shades.saturation}
+              value={sat}
               min={0}
               max={100}
-              onChange={onSatChange}
+              onChange={handleSatChange}
             />
             <InputNumber
               id={formId.lightness}
               label="Lightness:"
-              value={color.shades.lightness}
+              value={light}
               min={0}
               max={100}
-              onChange={onLightChange}
+              onChange={handleLightChange}
             />
           </fieldset>
         </fieldset>

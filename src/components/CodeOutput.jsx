@@ -8,8 +8,8 @@ function CodeOutput() {
   const catName = (name) => name.toLowerCase().replaceAll(' ', '-');
 
   const cssSyntax = `:root {${Object.values(colors).map((color) => {
-    let varDecl = color.shades.enabled
-      ? color.shades.colors.map((shade, index) => {
+    let varDecl = color.shades
+      ? color.shades.map((shade, index) => {
           let shadeDecl = `--${catName(color.name)}-${shade.name}: ${
             shade.hex
           };`;
@@ -21,8 +21,8 @@ function CodeOutput() {
 }`;
 
   const scssSyntax = `${Object.values(colors).map((color, index) => {
-    let varDecl = color.shades.enabled
-      ? color.shades.colors.map((shade, index) => {
+    let varDecl = color.shades
+      ? color.shades.map((shade, index) => {
           let shadeDecl = `\$${catName(color.name)}-${shade.name}: ${
             shade.hex
           };`;
@@ -40,8 +40,8 @@ function CodeOutput() {
   theme: {
     extend: {
       colors: {${Object.values(colors).map((color) => {
-        if (color.shades.enabled) {
-          let varDecl = `"${catName(color.name)}": {${color.shades.colors.map(
+        if (color.shades) {
+          let varDecl = `"${catName(color.name)}": {${color.shades.map(
             (shade) => {
               let shadeDecl = `"${shade.name}": "${shade.hex}"`;
               return `\n          ${shadeDecl}`;

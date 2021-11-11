@@ -23,59 +23,30 @@ export const initColors = (size) => {
         : i === 4
         ? 'Quinary'
         : `Color${i++}`;
-    const hex = genHex();
-    const amount = 9;
-    const baseIndex = 4;
-    const hue = 0;
-    const sat = 0;
-    const light = 5;
-    const shades = calcShades({
-      hex: hex,
-      shades: {
-        amount: amount,
-        baseIndex: baseIndex,
-        hue: hue,
-        saturation: sat,
-        lightness: light,
-      },
-    });
     colors[id] = {
       id: id,
       name: name,
-      hex: hex,
-      shades: {
-        enabled: false,
-        amount: amount,
-        baseIndex: baseIndex,
-        hue: hue,
-        saturation: sat,
-        lightness: light,
-        colors: shades,
-      },
+      hex: genHex(),
+      shades: false,
     };
   }
   return colors;
 };
 
-export const calcShades = (color) => {
-  const pos = color.shades.baseIndex + 1;
-  const shades = Array(color.shades.amount);
-  shades[color.shades.baseIndex] = { name: `${pos * 100}`, hex: color.hex };
+export const genShades = (hex, amount, pos, h, s, l) => {
+  const baseIndex = pos - 1;
+  const shades = Array(amount);
+  shades[baseIndex] = { name: `${pos * 100}`, hex: hex };
 
-  const baseShade = chroma(color.hex).hsl();
+  const baseShade = chroma(hex).hsl();
 
   const leftAmount = pos - 1;
-  const rightAmount = color.shades.amount - pos;
-
-  const hueAdjust = color.shades.hue;
-  const saturationAdjust = color.shades.saturation;
-  const lightnessAdjust = color.shades.lightness;
+  const rightAmount = amount - pos;
 
   for (let i = 1; i <= leftAmount; i++) {
-    let hue =
-      baseShade[0] === NaN ? 0 - hueAdjust * i : baseShade[0] - hueAdjust * i;
-    let saturation = baseShade[1] - (saturationAdjust / 100) * i;
-    let lightness = baseShade[2] - (lightnessAdjust / 100) * i;
+    let hue = baseShade[0] === NaN ? 0 - h * i : baseShade[0] - h * i;
+    let saturation = baseShade[1] - (s / 100) * i;
+    let lightness = baseShade[2] - (l / 100) * i;
     let shade = chroma
       .hsl(
         hue < 0 ? hue + 360 : hue,
@@ -83,17 +54,16 @@ export const calcShades = (color) => {
         lightness < 0 ? 0 : lightness
       )
       .hex();
-    shades[color.shades.baseIndex - i] = {
+    shades[baseIndex - i] = {
       name: `${(pos - i) * 100}`,
       hex: shade.toUpperCase(),
     };
   }
 
   for (let i = 1; i <= rightAmount; i++) {
-    let hue =
-      baseShade[0] === NaN ? 0 + hueAdjust * i : baseShade[0] + hueAdjust * i;
-    let saturation = baseShade[1] + (saturationAdjust / 100) * i;
-    let lightness = baseShade[2] + (lightnessAdjust / 100) * i;
+    let hue = baseShade[0] === NaN ? 0 + h * i : baseShade[0] + h * i;
+    let saturation = baseShade[1] + (s / 100) * i;
+    let lightness = baseShade[2] + (l / 100) * i;
     let shade = chroma
       .hsl(
         hue > 360 ? hue - 360 : hue,
@@ -101,7 +71,7 @@ export const calcShades = (color) => {
         lightness > 1 ? 1 : lightness
       )
       .hex();
-    shades[color.shades.baseIndex + i] = {
+    shades[baseIndex + i] = {
       name: `${(pos + i) * 100}`,
       hex: shade.toUpperCase(),
     };
@@ -109,5 +79,3 @@ export const calcShades = (color) => {
 
   return shades;
 };
-
-export default calcShades;
