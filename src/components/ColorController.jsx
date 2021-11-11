@@ -105,8 +105,13 @@ function ColorController({ color }) {
 
   return (
     <>
-      <div className="flex-auto overflow-y-scroll p-1">
-        <Swatch colors={shades ? shades : [{ hex }]} />
+      <div className="flex-auto overflow-y-scroll px-1">
+        <div className="sticky top-0 z-50 bg-gradient-to-b from-white">
+          <Swatch
+            colors={shades ? shades : [{ hex }]}
+            className="ring-8 ring-white"
+          />
+        </div>
         <div className="form-control">
           <label htmlFor={formId.name}>Color Name:</label>
           <input
