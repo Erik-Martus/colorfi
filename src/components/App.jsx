@@ -6,7 +6,6 @@ import ThemeBuilder from './ThemeBuilder.jsx';
 import CodeOutput from './CodeOutput.jsx';
 
 function App() {
-  console.log('Rendered app');
   return (
     <div className="App w-screen relative font-sans bg-gray-100">
       <Header />

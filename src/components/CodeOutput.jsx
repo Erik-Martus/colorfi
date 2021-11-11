@@ -1,80 +1,191 @@
-import CodeHighlight from './CodeHighlight.jsx';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { getColors } from '../store/colors';
+import CodeHighlight from './CodeHighlight.jsx';
+import Button from './Button';
 
 function CodeOutput() {
   const colors = useSelector(getColors);
 
-  const catName = (name) => name.toLowerCase().replaceAll(' ', '-');
+  const [prefLang, setPrefLang] = useState(
+    window.localStorage.getItem('prefLang') || ''
+  );
+  useEffect(() => {
+    window.localStorage.setItem('prefLang', prefLang);
+  }, [prefLang]);
 
-  const cssSyntax = `:root {${Object.values(colors).map((color) => {
-    let varDecl = color.shades
-      ? color.shades.map((shade, index) => {
-          let shadeDecl = `--${catName(color.name)}-${shade.name}: ${
-            shade.hex
-          };`;
-          return index === 0 ? shadeDecl : `\n  ${shadeDecl}`;
-        })
-      : `--${catName(color.name)}: ${color.hex};`;
-    return `\n  ${varDecl}`;
-  })}
-}`;
+  const [prefCase, setPrefCase] = useState(
+    window.localStorage.getItem('prefCase') || ''
+  );
+  useEffect(() => {
+    window.localStorage.setItem('prefCase', prefCase);
+  }, [prefCase]);
 
-  const scssSyntax = `${Object.values(colors).map((color, index) => {
-    let varDecl = color.shades
-      ? color.shades.map((shade, index) => {
-          let shadeDecl = `\$${catName(color.name)}-${shade.name}: ${
-            shade.hex
-          };`;
-          return index === 0 ? shadeDecl : `\n${shadeDecl}`;
-        })
-      : `\$${catName(color.name)}: ${color.hex};`;
-    return index === 0 ? varDecl : `\n${varDecl}`;
-  })}`;
-
-  const sassSyntax = scssSyntax.replaceAll(';', '');
-
-  const lessSyntax = scssSyntax.replaceAll('$', '@');
-
-  const tailwindSyntax = `module.exports = {
-  theme: {
-    extend: {
-      colors: {${Object.values(colors).map((color) => {
-        if (color.shades) {
-          let varDecl = `"${catName(color.name)}": {${color.shades.map(
-            (shade) => {
-              let shadeDecl = `"${shade.name}": "${shade.hex}"`;
-              return `\n          ${shadeDecl}`;
-            }
-          )}
-        }`;
-          return `\n        ${varDecl}`;
-        } else {
-          let varDecl = `"${catName(color.name)}": "${color.hex}"`;
-          return `\n        ${varDecl}`;
-        }
-      })}
-      }
+  const escName = (name, textCase) => {
+    switch (textCase) {
+      case 'snake':
+        return name.toLowerCase().replaceAll(' ', '-');
+      default:
+        return name;
     }
-  }
-}`;
+  };
+
+  const styleVars = (lang) => {
+    let pre, suf;
+    switch (lang) {
+      case 'css':
+        pre = '--';
+        suf = ';';
+        break;
+      case 'sass':
+        pre = '$';
+        suf = '';
+        break;
+      case 'scss':
+        pre = '$';
+        suf = ';';
+        break;
+      case 'less':
+        pre = '@';
+        suf = ';';
+        break;
+      default:
+        console.error(`Unknown language for styleVars(). Provided ${lang}.`);
+        break;
+    }
+    let syntax = '';
+
+    Object.values(colors).forEach((color, index) => {
+      let name = escName(color.name, 'snake');
+      if (color.shades) {
+        let shadeDecl = '';
+        color.shades.forEach((shade, index) => {
+          let decl = `${pre}${name}-${shade.name}: ${shade.hex}${suf}`;
+          index > 0 ? (shadeDecl += `\n${decl}`) : (shadeDecl += decl);
+        });
+        index > 0 ? (syntax += `\n${shadeDecl}`) : (syntax += shadeDecl);
+      } else {
+        let decl = `${pre}${name}: ${color.hex}${suf}`;
+        index > 0 ? (syntax += `\n${decl}`) : (syntax += decl);
+      }
+    });
+    return `${syntax}`;
+  };
+
+  const cssVars = styleVars('css');
+  const cssSyntax = `:root {\n${cssVars.replaceAll('--', '  --')}\n}`;
+
+  const scssSyntax = styleVars('scss');
+
+  const sassSyntax = styleVars('sass');
+
+  const lessSyntax = styleVars('less');
+
+  const tailwindVars = () => {
+    let syntax = {};
+    Object.values(colors).forEach((color) => {
+      let name = escName(color.name, 'snake');
+      if (color.shades) {
+        let shades = {};
+        color.shades.forEach((shade) => {
+          shades[shade.name] = shade.hex;
+        });
+        syntax[name] = shades;
+      } else {
+        syntax[name] = color.hex;
+      }
+    });
+    return syntax;
+  };
+  const tailwindSyntax = `module.exports = ${JSON.stringify(
+    {
+      theme: {
+        extend: {
+          colors: tailwindVars(),
+        },
+      },
+    },
+    null,
+    2
+  )
+    .replace('"theme"', 'theme')
+    .replace('"extend"', 'extend')
+    .replace('"colors"', 'colors')}`;
 
   return (
-    <>
-      <CodeHighlight language="css">
-        {cssSyntax.replaceAll(',', '')}
-      </CodeHighlight>
-      <CodeHighlight language="scss">
-        {scssSyntax.replaceAll(',', '')}
-      </CodeHighlight>
-      <CodeHighlight language="sass">
-        {sassSyntax.replaceAll(',', '')}
-      </CodeHighlight>
-      <CodeHighlight language="less">
-        {lessSyntax.replaceAll(',', '')}
-      </CodeHighlight>
-      <CodeHighlight language="javascript">{tailwindSyntax}</CodeHighlight>
-    </>
+    <section className="p-2 bg-gray-700 rounded-xl">
+      <article id="tab-css">
+        <CodeHighlight language="css">{cssSyntax}</CodeHighlight>
+        <div className="flex justify-center gap-4">
+          <Button
+            type="secondary"
+            onClick={() => navigator.clipboard.writeText(cssSyntax)}
+          >
+            Copy Everything
+          </Button>
+          <Button
+            type="secondary"
+            onClick={() => navigator.clipboard.writeText(cssVars)}
+          >
+            Copy Vars Only
+          </Button>
+        </div>
+      </article>
+      <article id="tab-scss">
+        <CodeHighlight language="scss">{scssSyntax}</CodeHighlight>
+        <div className="flex justify-center gap-4">
+          <Button
+            type="secondary"
+            onClick={() => navigator.clipboard.writeText(scssSyntax)}
+          >
+            Copy
+          </Button>
+        </div>
+      </article>
+      <article id="tab-sass">
+        <CodeHighlight language="sass">{sassSyntax}</CodeHighlight>
+        <div className="flex justify-center gap-4">
+          <Button
+            type="secondary"
+            onClick={() => navigator.clipboard.writeText(sassSyntax)}
+          >
+            Copy
+          </Button>
+        </div>
+      </article>
+      <article id="tab-less">
+        <CodeHighlight language="less">{lessSyntax}</CodeHighlight>
+        <div className="flex justify-center gap-4">
+          <Button
+            type="secondary"
+            onClick={() => navigator.clipboard.writeText(lessSyntax)}
+          >
+            Copy
+          </Button>
+        </div>
+      </article>
+      <article id="tab-tailwind">
+        <CodeHighlight language="javascript">{tailwindSyntax}</CodeHighlight>
+        <div className="flex justify-center gap-4">
+          <Button
+            type="secondary"
+            onClick={() => navigator.clipboard.writeText(tailwindSyntax)}
+          >
+            Copy Everything
+          </Button>
+          <Button
+            type="secondary"
+            onClick={() =>
+              navigator.clipboard.writeText(
+                JSON.stringify(tailwindVars(), null, 2)
+              )
+            }
+          >
+            Copy Vars Only
+          </Button>
+        </div>
+      </article>
+    </section>
   );
 }
 

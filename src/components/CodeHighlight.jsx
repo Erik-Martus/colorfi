@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Prism from 'prismjs';
 import '../css/prism.css';
-import CopyIcon from '../icons/copy.svg';
 
 function CodeHighlight({ language, children }) {
   const codeNode = React.useRef();
@@ -12,21 +11,13 @@ function CodeHighlight({ language, children }) {
   }, [children]);
 
   return (
-    <div id={`codeblock-${language}`}>
-      <button
-        role="button"
-        onClick={() => {
-          navigator.clipboard.writeText(children);
-        }}
-      >
-        <CopyIcon />
-      </button>
+    <article id={`codeblock-${language}`}>
       <pre>
         <code ref={codeNode} className={`language-${language}`}>
           {children}
         </code>
       </pre>
-    </div>
+    </article>
   );
 }
 
