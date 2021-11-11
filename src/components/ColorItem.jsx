@@ -26,9 +26,11 @@ function ColorItem({ color }) {
           <div className="flex gap-2">
             <Button type="icon" className="mb-0" onClick={handleEdit}>
               <EditIcon />
+              <span className="sr-only">Edit color {color.name}</span>
             </Button>
             <Button type="icon" className="mb-0" onClick={handleDelete}>
               <TrashIcon />
+              <span className="sr-only">Delete color {color.name}</span>
             </Button>
           </div>
         </div>

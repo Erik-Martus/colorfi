@@ -22,7 +22,7 @@ function ThemeBuilder() {
         {colorItems}
         <Button type="icon" className="!w-96 h-24" onClick={onAdd}>
           <PlusCircle />
-          <span className="sr-only">Add</span>
+          <span className="sr-only">Add color</span>
         </Button>
       </div>
     </section>
