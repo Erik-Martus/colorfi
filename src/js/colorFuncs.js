@@ -13,16 +13,16 @@ export const initColors = (size) => {
     const id = genColorId();
     const name =
       i === 0
-        ? 'Primary'
+        ? 'primary'
         : i === 1
-        ? 'Secondary'
+        ? 'secondary'
         : i === 2
-        ? 'Tertiary'
+        ? 'tertiary'
         : i === 3
-        ? 'Quaternary'
+        ? 'quaternary'
         : i === 4
-        ? 'Quinary'
-        : `Color${i++}`;
+        ? 'quinary'
+        : `color${i++}`;
     colors[id] = {
       id: id,
       name: name,

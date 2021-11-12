@@ -9,6 +9,9 @@ module.exports = {
       sans: ['inter', ...defaultTheme.fontFamily.sans],
     },
     extend: {
+      borderWidth: {
+        3: '3px',
+      },
       transitionProperty: {
         sizing: 'height, width',
       },

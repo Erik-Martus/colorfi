@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 import Prism from 'prismjs';
 import '../css/prism.css';
 
-function CodeHighlight({ language, children }) {
+function CodeHighlight({ language, className = '', children }) {
   const codeNode = React.useRef();
 
   useEffect(() => {
     Prism.highlightAll();
-  }, [children]);
+  }, [language, children]);
 
   return (
-    <article id={`codeblock-${language}`}>
+    <article id={`codeblock-${language}`} className={className}>
       <pre>
         <code ref={codeNode} className={`language-${language}`}>
           {children}
