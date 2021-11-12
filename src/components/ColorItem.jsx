@@ -19,8 +19,18 @@ function ColorItem({ color }) {
 
   return (
     <div className="">
-      <div className="flex flex-col gap-2 cursor-pointer" onClick={handleEdit}>
-        <Swatch colors={color.shades ? color.shades : [color]} />
+      <div className="flex flex-col gap-2 p-2">
+        <div
+          class="group relative cursor-pointer hover:scale-105 transition-transform"
+          onClick={handleEdit}
+        >
+          <Swatch colors={color.shades ? color.shades : [color]} />
+          <div className="grid place-content-center w-full h-24 absolute top-0 left-0 bg-gray-800 bg-opacity-50 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity">
+            <div className="w-12 text-white">
+              <EditIcon />
+            </div>
+          </div>
+        </div>
         <div className="flex items-center justify-between">
           <SwatchLabel label={color.name ? color.name : 'Color Name'} />
           <div className="flex gap-2">

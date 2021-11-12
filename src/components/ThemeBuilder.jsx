@@ -18,12 +18,14 @@ function ThemeBuilder() {
   return (
     <section id="colors" className="mb-8 pt-3">
       <h2>Colors</h2>
-      <div className="grid grid-cols-auto-fit gap-4">
+      <div className="grid grid-cols-auto-fit">
         {colorItems}
-        <Button type="icon" className="!w-full h-24" onClick={onAdd}>
-          <PlusCircle />
-          <span className="sr-only">Add color</span>
-        </Button>
+        <div className="p-2">
+          <Button type="icon" className="!w-full h-24" onClick={onAdd}>
+            <PlusCircle />
+            <span className="sr-only">Add color</span>
+          </Button>
+        </div>
       </div>
     </section>
   );
