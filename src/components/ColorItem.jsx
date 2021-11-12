@@ -21,7 +21,7 @@ function ColorItem({ color }) {
     <div className="">
       <div className="flex flex-col gap-2 p-2">
         <div
-          class="group relative cursor-pointer hover:scale-105 transition-transform"
+          className="group relative cursor-pointer hover:scale-105 transition-transform"
           onClick={handleEdit}
         >
           <Swatch colors={color.shades ? color.shades : [color]} />
