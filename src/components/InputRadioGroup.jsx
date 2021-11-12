@@ -10,7 +10,7 @@ function InputRadioGroup({ name, label, options, active, onChange }) {
           <label
             htmlFor={`${name}-${option.toLowerCase().replaceAll(' ', '-')}`}
             key={index}
-            className={`flex gap-2 mb-0 pt-2`}
+            className={`flex gap-2 mb-0 pt-2 cursor-pointer`}
           >
             <input
               type="radio"
