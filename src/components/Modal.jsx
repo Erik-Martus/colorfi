@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import Button from './Button';
 import CloseIcon from '../icons/close.svg';
 
-const noScroll = () => {
-  if (document.body.classList.contains('noScroll')) {
+const noScroll = (hidden) => {
+  if (hidden) {
     const scrollY = document.body.style.top;
     document.body.classList.remove('noScroll');
     document.body.style.position = 'relative';
@@ -21,8 +21,9 @@ function Modal({ title, id, hidden, handleHidden, children, headerChildren }) {
   const modalId = id
     ? `modal-${id}`
     : `modal-${title.toLowerCase().replace(' ', '-')}`;
+
   useEffect(() => {
-    noScroll();
+    noScroll(hidden);
   }, [hidden]);
   return (
     <article

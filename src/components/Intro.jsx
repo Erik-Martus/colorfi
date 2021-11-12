@@ -24,7 +24,7 @@ function Intro() {
         hidden={hiddenState}
         handleHidden={() => setHiddenState((state) => !state)}
       >
-        <Themes />
+        <Themes onChange={() => setHiddenState((state) => !state)} />
       </Modal>
     </section>
   );

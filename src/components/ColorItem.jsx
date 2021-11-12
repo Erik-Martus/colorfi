@@ -18,8 +18,8 @@ function ColorItem({ color }) {
   const handleHidden = () => setHiddenState((state) => !state);
 
   return (
-    <div className="w-96">
-      <div className="flex flex-col gap-2">
+    <div className="">
+      <div className="flex flex-col gap-2 cursor-pointer" onClick={handleEdit}>
         <Swatch colors={color.shades ? color.shades : [color]} />
         <div className="flex items-center justify-between">
           <SwatchLabel label={color.name ? color.name : 'Color Name'} />

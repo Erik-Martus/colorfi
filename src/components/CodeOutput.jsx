@@ -129,7 +129,7 @@ function CodeOutput() {
   return (
     <section className="max-w-screen-md mx-auto p-4 bg-gray-700 rounded-xl">
       <h2 className="text-white">Get Your Code</h2>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         <div className="h-full p-4 bg-white rounded-xl">
           <InputRadioGroup
             name="lang"
@@ -150,7 +150,7 @@ function CodeOutput() {
           language={
             prefLang === 'Tailwind' ? 'javascript' : prefLang.toLowerCase()
           }
-          className="h-full lg:col-span-3"
+          className="h-full lg:col-span-2"
         >
           {code}
         </CodeHighlight>

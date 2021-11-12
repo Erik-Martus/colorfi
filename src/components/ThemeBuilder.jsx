@@ -18,9 +18,9 @@ function ThemeBuilder() {
   return (
     <section id="colors" className="mb-8 pt-3">
       <h2>Colors</h2>
-      <div className="flex gap-6 flex-wrap">
+      <div className="grid grid-cols-auto-fit gap-4">
         {colorItems}
-        <Button type="icon" className="!w-96 h-24" onClick={onAdd}>
+        <Button type="icon" className="!w-full h-24" onClick={onAdd}>
           <PlusCircle />
           <span className="sr-only">Add color</span>
         </Button>

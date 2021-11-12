@@ -6,256 +6,31 @@
         "id": "color-d149",
         "name": "Mango",
         "hex": "#FFBE0B",
-        "shades": {
-          "enabled": false,
-          "amount": 9,
-          "baseIndex": 4,
-          "hue": 0,
-          "saturation": 0,
-          "lightness": 5,
-          "colors": [
-            {
-              "name": "100",
-              "hex": "#9A3302"
-            },
-            {
-              "name": "200",
-              "hex": "#B33C03"
-            },
-            {
-              "name": "300",
-              "hex": "#CC4403"
-            },
-            {
-              "name": "400",
-              "hex": "#E54D04"
-            },
-            {
-              "name": "500",
-              "hex": "#FB5607"
-            },
-            {
-              "name": "600",
-              "hex": "#FB6720"
-            },
-            {
-              "name": "700",
-              "hex": "#FC7839"
-            },
-            {
-              "name": "800",
-              "hex": "#FC8952"
-            },
-            {
-              "name": "900",
-              "hex": "#FD9A6B"
-            }
-          ]
-        }
+        "shades": false
       },
       "color-ea16": {
         "id": "color-ea16",
         "name": "Orange Pantone",
         "hex": "#FB5607",
-        "shades": {
-          "enabled": false,
-          "amount": 9,
-          "baseIndex": 4,
-          "hue": 0,
-          "saturation": 0,
-          "lightness": 5,
-          "colors": [
-            {
-              "name": "100",
-              "hex": "#9A3302"
-            },
-            {
-              "name": "200",
-              "hex": "#B33C03"
-            },
-            {
-              "name": "300",
-              "hex": "#CC4403"
-            },
-            {
-              "name": "400",
-              "hex": "#E54D04"
-            },
-            {
-              "name": "500",
-              "hex": "#FB5607"
-            },
-            {
-              "name": "600",
-              "hex": "#FB6720"
-            },
-            {
-              "name": "700",
-              "hex": "#FC7839"
-            },
-            {
-              "name": "800",
-              "hex": "#FC8952"
-            },
-            {
-              "name": "900",
-              "hex": "#FD9A6B"
-            }
-          ]
-        }
+        "shades": false
       },
       "color-7043": {
         "id": "color-7043",
         "name": "Winter Sky",
         "hex": "#FF006E",
-        "shades": {
-          "enabled": false,
-          "amount": 9,
-          "baseIndex": 4,
-          "hue": 0,
-          "saturation": 0,
-          "lightness": 5,
-          "colors": [
-            {
-              "name": "100",
-              "hex": "#990042"
-            },
-            {
-              "name": "200",
-              "hex": "#B3004D"
-            },
-            {
-              "name": "300",
-              "hex": "#CC0058"
-            },
-            {
-              "name": "400",
-              "hex": "#E60063"
-            },
-            {
-              "name": "500",
-              "hex": "#FF006E"
-            },
-            {
-              "name": "600",
-              "hex": "#FF1A7C"
-            },
-            {
-              "name": "700",
-              "hex": "#FF338B"
-            },
-            {
-              "name": "800",
-              "hex": "#FF4D99"
-            },
-            {
-              "name": "900",
-              "hex": "#FF66A8"
-            }
-          ]
-        }
+        "shades": false
       },
       "color-c8f7": {
         "id": "color-c8f7",
         "name": "Blue Violet",
         "hex": "#8338EC",
-        "shades": {
-          "enabled": false,
-          "amount": 9,
-          "baseIndex": 4,
-          "hue": 0,
-          "saturation": 0,
-          "lightness": 5,
-          "colors": [
-            {
-              "name": "100",
-              "hex": "#5211AD"
-            },
-            {
-              "name": "200",
-              "hex": "#5D13C5"
-            },
-            {
-              "name": "300",
-              "hex": "#6815DC"
-            },
-            {
-              "name": "400",
-              "hex": "#7421EA"
-            },
-            {
-              "name": "500",
-              "hex": "#8338EC"
-            },
-            {
-              "name": "600",
-              "hex": "#924FEE"
-            },
-            {
-              "name": "700",
-              "hex": "#A067F0"
-            },
-            {
-              "name": "800",
-              "hex": "#AF7EF3"
-            },
-            {
-              "name": "900",
-              "hex": "#BD95F5"
-            }
-          ]
-        }
+        "shades": false
       },
       "color-e735": {
         "id": "color-e735",
         "name": "Azure",
         "hex": "#3A86FF",
-        "shades": {
-          "enabled": false,
-          "amount": 9,
-          "baseIndex": 4,
-          "hue": 0,
-          "saturation": 0,
-          "lightness": 5,
-          "colors": [
-            {
-              "name": "100",
-              "hex": "#0051D3"
-            },
-            {
-              "name": "200",
-              "hex": "#005BED"
-            },
-            {
-              "name": "300",
-              "hex": "#0767FF"
-            },
-            {
-              "name": "400",
-              "hex": "#2176FF"
-            },
-            {
-              "name": "500",
-              "hex": "#3A86FF"
-            },
-            {
-              "name": "600",
-              "hex": "#5496FF"
-            },
-            {
-              "name": "700",
-              "hex": "#6DA5FF"
-            },
-            {
-              "name": "800",
-              "hex": "#87B5FF"
-            },
-            {
-              "name": "900",
-              "hex": "#A0C5FF"
-            }
-          ]
-        }
+        "shades": false
       }
     }
   },
@@ -266,256 +41,31 @@
         "id": "color-f3b4",
         "name": "Royal Dark Blue",
         "hex": "#00296B",
-        "shades": {
-          "enabled": false,
-          "amount": 9,
-          "baseIndex": 4,
-          "hue": 0,
-          "saturation": 0,
-          "lightness": 5,
-          "colors": [
-            {
-              "name": "100",
-              "hex": "#000205"
-            },
-            {
-              "name": "200",
-              "hex": "#000C1E"
-            },
-            {
-              "name": "300",
-              "hex": "#001538"
-            },
-            {
-              "name": "400",
-              "hex": "#001F52"
-            },
-            {
-              "name": "500",
-              "hex": "#00296B"
-            },
-            {
-              "name": "600",
-              "hex": "#003385"
-            },
-            {
-              "name": "700",
-              "hex": "#003D9E"
-            },
-            {
-              "name": "800",
-              "hex": "#0046B8"
-            },
-            {
-              "name": "900",
-              "hex": "#0050D1"
-            }
-          ]
-        }
+        "shades": false
       },
       "color-53ac": {
         "id": "color-53ac",
         "name": "Dark Cornflower Blue",
         "hex": "#003F88",
-        "shades": {
-          "enabled": false,
-          "amount": 9,
-          "baseIndex": 4,
-          "hue": 0,
-          "saturation": 0,
-          "lightness": 5,
-          "colors": [
-            {
-              "name": "100",
-              "hex": "#001022"
-            },
-            {
-              "name": "200",
-              "hex": "#001C3B"
-            },
-            {
-              "name": "300",
-              "hex": "#002755"
-            },
-            {
-              "name": "400",
-              "hex": "#00336F"
-            },
-            {
-              "name": "500",
-              "hex": "#003F88"
-            },
-            {
-              "name": "600",
-              "hex": "#004BA2"
-            },
-            {
-              "name": "700",
-              "hex": "#0057BB"
-            },
-            {
-              "name": "800",
-              "hex": "#0062D5"
-            },
-            {
-              "name": "900",
-              "hex": "#006EEE"
-            }
-          ]
-        }
+        "shades": false
       },
       "color-f882": {
         "id": "color-f882",
         "name": "USAFA Blue",
         "hex": "#00509D",
-        "shades": {
-          "enabled": false,
-          "amount": 9,
-          "baseIndex": 4,
-          "hue": 0,
-          "saturation": 0,
-          "lightness": 5,
-          "colors": [
-            {
-              "name": "100",
-              "hex": "#001C37"
-            },
-            {
-              "name": "200",
-              "hex": "#002951"
-            },
-            {
-              "name": "300",
-              "hex": "#00366A"
-            },
-            {
-              "name": "400",
-              "hex": "#004384"
-            },
-            {
-              "name": "500",
-              "hex": "#00509D"
-            },
-            {
-              "name": "600",
-              "hex": "#005DB7"
-            },
-            {
-              "name": "700",
-              "hex": "#006AD0"
-            },
-            {
-              "name": "800",
-              "hex": "#0077EA"
-            },
-            {
-              "name": "900",
-              "hex": "#0484FF"
-            }
-          ]
-        }
+        "shades": false
       },
       "color-68e9": {
         "id": "color-68e9",
         "name": "Mikado Yellow",
         "hex": "#FFC500",
-        "shades": {
-          "enabled": false,
-          "amount": 9,
-          "baseIndex": 4,
-          "hue": 0,
-          "saturation": 0,
-          "lightness": 5,
-          "colors": [
-            {
-              "name": "100",
-              "hex": "#997600"
-            },
-            {
-              "name": "200",
-              "hex": "#B38A00"
-            },
-            {
-              "name": "300",
-              "hex": "#CC9E00"
-            },
-            {
-              "name": "400",
-              "hex": "#E6B100"
-            },
-            {
-              "name": "500",
-              "hex": "#FFC500"
-            },
-            {
-              "name": "600",
-              "hex": "#FFCB1A"
-            },
-            {
-              "name": "700",
-              "hex": "#FFD133"
-            },
-            {
-              "name": "800",
-              "hex": "#FFD64D"
-            },
-            {
-              "name": "900",
-              "hex": "#FFDC66"
-            }
-          ]
-        }
+        "shades": false
       },
       "color-bc6c": {
         "id": "color-bc6c",
         "name": "Cyber Yellow",
         "hex": "#FFD500",
-        "shades": {
-          "enabled": false,
-          "amount": 9,
-          "baseIndex": 4,
-          "hue": 0,
-          "saturation": 0,
-          "lightness": 5,
-          "colors": [
-            {
-              "name": "100",
-              "hex": "#998000"
-            },
-            {
-              "name": "200",
-              "hex": "#B39500"
-            },
-            {
-              "name": "300",
-              "hex": "#CCAA00"
-            },
-            {
-              "name": "400",
-              "hex": "#E6C000"
-            },
-            {
-              "name": "500",
-              "hex": "#FFD500"
-            },
-            {
-              "name": "600",
-              "hex": "#FFD91A"
-            },
-            {
-              "name": "700",
-              "hex": "#FFDD33"
-            },
-            {
-              "name": "800",
-              "hex": "#FFE24D"
-            },
-            {
-              "name": "900",
-              "hex": "#FFE666"
-            }
-          ]
-        }
+        "shades": false
       }
     }
   }

@@ -12,6 +12,9 @@ module.exports = {
       borderWidth: {
         3: '3px',
       },
+      gridTemplateColumns: {
+        'auto-fit': 'repeat( auto-fit, minmax(250px, 1fr) )',
+      },
       transitionProperty: {
         sizing: 'height, width',
       },
