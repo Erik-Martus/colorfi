@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Button from './Button';
 import Modal from './Modal';
 import Themes from './Themes';
-import ArrowDown from '../icons/arrow-down.svg';
+import IconArrowDown from '../icons/arrow-down.svg';
 
 function Intro() {
   const [hiddenState, setHiddenState] = useState(true);
@@ -17,7 +17,7 @@ function Intro() {
         Or get started below
       </p>
       <a href="#colors">
-        <ArrowDown className="animate-bounce text-gray-600 w-12" />
+        <IconArrowDown className="animate-bounce text-gray-600 w-12" />
       </a>
       <Modal
         title="Themes"

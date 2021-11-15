@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import Button from './Button';
 import ColorItem from './ColorItem';
-import PlusCircle from '../icons/plus-circle.svg';
+import IconPlusCircle from '../icons/plus-circle.svg';
 import { getColors, addColor } from '../store/colors';
 
 function ThemeBuilder() {
@@ -22,7 +22,7 @@ function ThemeBuilder() {
         {colorItems}
         <div className="p-2">
           <Button type="icon" className="!w-full h-24" onClick={onAdd}>
-            <PlusCircle />
+            <IconPlusCircle />
             <span className="sr-only">Add color</span>
           </Button>
         </div>

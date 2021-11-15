@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import Minus from '../icons/minus.svg';
-import Plus from '../icons/plus.svg';
+import IconMinus from '../icons/minus.svg';
+import IconPlus from '../icons/plus.svg';
 
 function InputNumber({
   id,
@@ -21,7 +21,7 @@ function InputNumber({
             role="button"
             onClick={() => onChange(value - 1 >= min ? value - 1 : min)}
           >
-            <Minus />
+            <IconMinus />
           </button>
           <input
             type="number"
@@ -44,7 +44,7 @@ function InputNumber({
             role="button"
             onClick={() => onChange(value + 1 <= max ? value + 1 : max)}
           >
-            <Plus />
+            <IconPlus />
           </button>
         </div>
       </label>

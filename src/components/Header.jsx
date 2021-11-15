@@ -1,6 +1,6 @@
 import React from 'react';
 import Logo from './logo.svg';
-import GhIcon from '../icons/github.svg';
+import IconGitHub from '../icons/github.svg';
 
 function Header() {
   return (
@@ -14,7 +14,7 @@ function Header() {
             rel="noreferrer"
             className="text-indigo-600 hover:text-indigo-800 transition-colors"
           >
-            <GhIcon />
+            <IconGitHub />
           </a>
         </nav>
       </div>

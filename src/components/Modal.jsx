@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Button from './Button';
-import CloseIcon from '../icons/close.svg';
+import IconClose from '../icons/close.svg';
 
 const noScroll = (hidden) => {
   if (hidden) {
@@ -43,7 +43,7 @@ function Modal({ title, id, hidden, handleHidden, children, headerChildren }) {
             <div className="flex items-center justify-between mb-4">
               <h3>{title}</h3>
               <Button type="close" onClick={handleHidden}>
-                <CloseIcon />
+                <IconClose />
               </Button>
             </div>
             {headerChildren}
