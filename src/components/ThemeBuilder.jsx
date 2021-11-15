@@ -18,7 +18,7 @@ function ThemeBuilder() {
   return (
     <section id="colors" className="mb-8 pt-3">
       <h2>Colors</h2>
-      <div className="grid grid-cols-auto-fit">
+      <div className="grid grid-cols-auto-fill">
         {colorItems}
         <div className="p-2">
           <Button type="icon" className="!w-full h-24" onClick={onAdd}>

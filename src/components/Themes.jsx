@@ -33,7 +33,7 @@ function Themes({ onChange }) {
 
   return (
     <article>
-      <div className="grid grid-cols-auto-fit">{themeItems}</div>
+      <div className="grid grid-cols-auto-fill">{themeItems}</div>
     </article>
   );
 }
