@@ -145,4 +145,11 @@
   .form-control {
     @apply max-w-full mt-6 first:mt-0;
   }
+
+  .absolute-center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
 }

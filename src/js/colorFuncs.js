@@ -36,7 +36,7 @@ export const initColors = (size) => {
 export const genShades = (hex, amount, pos, h, s, l) => {
   const baseIndex = pos - 1;
   const shades = Array(amount);
-  shades[baseIndex] = { name: `${pos * 100}`, hex: hex };
+  shades[baseIndex] = { name: `${pos * 100}`, hex: hex, base: true };
 
   const baseShade = chroma(hex).hsl();
 
@@ -75,6 +75,24 @@ export const genShades = (hex, amount, pos, h, s, l) => {
       name: `${(pos + i) * 100}`,
       hex: shade.toUpperCase(),
     };
+  }
+
+  const hexArr = shades.map((shade) => shade.hex);
+  const duplicateHex = hexArr.filter((item, index) => {
+    return hexArr.indexOf(item) !== index;
+  });
+
+  let dupes = {};
+  shades.forEach((shade, index) => {
+    dupes[shade.hex] = dupes[shade.hex] || [];
+    dupes[shade.hex].push(index);
+  });
+  for (hex in dupes) {
+    if (dupes[hex].length > 1) {
+      dupes[hex].forEach((item) => {
+        shades[item].error = 'Duplicate shade';
+      });
+    }
   }
 
   return shades;

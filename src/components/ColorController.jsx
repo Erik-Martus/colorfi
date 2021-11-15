@@ -110,6 +110,7 @@ function ColorController({ color }) {
           <Swatch
             colors={shades ? shades : [{ hex }]}
             className="ring-8 ring-white"
+            context
           />
         </div>
         <div className="form-control">
