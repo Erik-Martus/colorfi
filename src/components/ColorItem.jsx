@@ -31,7 +31,7 @@ function ColorItem({ color }) {
             </div>
           </div>
         </div>
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-4">
           <SwatchLabel label={color.name ? color.name : 'Color Name'} />
           <div className="flex gap-2">
             <Button type="icon" className="mb-0" onClick={handleEdit}>
