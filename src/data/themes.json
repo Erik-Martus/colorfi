@@ -6,31 +6,36 @@
         "id": "color-d149",
         "name": "Mango",
         "hex": "#FFBE0B",
-        "shades": false
+        "shades": false,
+        "locked": false
       },
       "color-ea16": {
         "id": "color-ea16",
         "name": "Orange Pantone",
         "hex": "#FB5607",
-        "shades": false
+        "shades": false,
+        "locked": false
       },
       "color-7043": {
         "id": "color-7043",
         "name": "Winter Sky",
         "hex": "#FF006E",
-        "shades": false
+        "shades": false,
+        "locked": false
       },
       "color-c8f7": {
         "id": "color-c8f7",
         "name": "Blue Violet",
         "hex": "#8338EC",
-        "shades": false
+        "shades": false,
+        "locked": false
       },
       "color-e735": {
         "id": "color-e735",
         "name": "Azure",
         "hex": "#3A86FF",
-        "shades": false
+        "shades": false,
+        "locked": false
       }
     }
   },
@@ -41,31 +46,36 @@
         "id": "color-f3b4",
         "name": "Royal Dark Blue",
         "hex": "#00296B",
-        "shades": false
+        "shades": false,
+        "locked": false
       },
       "color-53ac": {
         "id": "color-53ac",
         "name": "Dark Cornflower Blue",
         "hex": "#003F88",
-        "shades": false
+        "shades": false,
+        "locked": false
       },
       "color-f882": {
         "id": "color-f882",
         "name": "USAFA Blue",
         "hex": "#00509D",
-        "shades": false
+        "shades": false,
+        "locked": false
       },
       "color-68e9": {
         "id": "color-68e9",
         "name": "Mikado Yellow",
         "hex": "#FFC500",
-        "shades": false
+        "shades": false,
+        "locked": false
       },
       "color-bc6c": {
         "id": "color-bc6c",
         "name": "Cyber Yellow",
         "hex": "#FFD500",
-        "shades": false
+        "shades": false,
+        "locked": false
       }
     }
   }

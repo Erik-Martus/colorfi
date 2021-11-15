@@ -28,6 +28,7 @@ export const initColors = (size) => {
       name: name,
       hex: genHex(),
       shades: false,
+      locked: false,
     };
   }
   return colors;

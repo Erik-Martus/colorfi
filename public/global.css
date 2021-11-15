@@ -79,7 +79,7 @@
     @apply bg-gray-100;
     @apply rounded-xl;
     @apply shadow-xl;
-    @apply transition hover:bg-gray-200 hover:scale-105;
+    @apply transition hover:bg-gray-200 hover:scale-105 cursor-pointer;
 
     &.primary {
       @apply text-white;

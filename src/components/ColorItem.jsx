@@ -5,17 +5,24 @@ import ColorController from './ColorController';
 import Modal from './Modal';
 import Swatch from './Swatch';
 import SwatchLabel from './SwatchLabel';
-import IconTrash from '../icons/trash.svg';
 import IconEdit from '../icons/pencil.svg';
-import { deleteColor } from '../store/colors';
+import IconTrash from '../icons/trash.svg';
+import IconLocked from '../icons/padlock.svg';
+import IconUnlocked from '../icons/padlock-open.svg';
+import { deleteColor, updateColor } from '../store/colors';
 
 function ColorItem({ color }) {
   const dispatch = useDispatch();
   const [hiddenState, setHiddenState] = useState(true);
+  const [locked, setLocked] = useState(false);
 
   const handleEdit = () => setHiddenState(false);
   const handleDelete = (e) => dispatch(deleteColor(color.id));
   const handleHidden = () => setHiddenState((state) => !state);
+  const handleLock = (e) => {
+    setLocked(e.target.checked);
+    dispatch(updateColor(color.id, { locked: e.target.checked }));
+  };
 
   return (
     <div className="">
@@ -34,10 +41,28 @@ function ColorItem({ color }) {
         <div className="flex items-center justify-between gap-4">
           <SwatchLabel label={color.name ? color.name : 'Color Name'} />
           <div className="flex gap-2">
-            <Button type="icon" className="mb-0" onClick={handleEdit}>
-              <IconEdit />
-              <span className="sr-only">Edit color {color.name}</span>
-            </Button>
+            <div className="form-control">
+              <label
+                htmlFor={`lock-${color.id}`}
+                className={`btn icon mb-0 ${
+                  locked ? 'bg-gray-800 hover:bg-gray-700 text-white' : ''
+                }`}
+              >
+                <span className="sr-only">
+                  {locked ? 'Unlock color' : 'Lock color'}
+                </span>
+                <span className="relative">
+                  <input
+                    id={`lock-${color.id}`}
+                    type="checkbox"
+                    checked={locked}
+                    onChange={handleLock}
+                    className="sr-only peer"
+                  />
+                  {locked ? <IconLocked /> : <IconUnlocked />}
+                </span>
+              </label>
+            </div>
             <Button type="icon" className="mb-0" onClick={handleDelete}>
               <IconTrash />
               <span className="sr-only">Delete color {color.name}</span>

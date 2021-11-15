@@ -11,14 +11,9 @@ const initialState = {
 
 export function themeReducer(state = initialState, action) {
   switch (action.type) {
-    case THEME_CHANGED:
-      return {
-        ...state,
-        colors: themeLib[action.payload].colors,
-      };
     case COLOR_ADDED: {
       const id = genColorId();
-      const name = `Color${state.colorCount}`;
+      const name = `color${state.colorCount}`;
       return {
         ...state,
         colors: {
@@ -28,6 +23,7 @@ export function themeReducer(state = initialState, action) {
             name: name,
             hex: genHex(),
             shades: false,
+            locked: false,
           },
         },
         colorCount: state.colorCount + 1,
@@ -37,28 +33,6 @@ export function themeReducer(state = initialState, action) {
       const { [action.payload]: remove, ...remainingColors } = state.colors;
       return { ...state, colors: remainingColors };
     }
-    case COLOR_NAME_UPDATED:
-      return {
-        ...state,
-        colors: {
-          ...state.colors,
-          [action.payload.id]: {
-            ...state.colors[action.payload.id],
-            name: action.payload.value,
-          },
-        },
-      };
-    case COLOR_HEX_UPDATED:
-      return {
-        ...state,
-        colors: {
-          ...state.colors,
-          [action.payload.id]: {
-            ...state.colors[action.payload.id],
-            hex: action.payload.value,
-          },
-        },
-      };
     case COLOR_SHADES_TOGGLED:
       return {
         ...state,
@@ -75,7 +49,7 @@ export function themeReducer(state = initialState, action) {
       };
     case COLOR_SHADES_UPDATED: {
       console.log(action.payload);
-      const color = state.colors[action.payload.id];
+      let color = state.colors[action.payload.id];
       const props = Object.keys(action.payload.value);
       const values = Object.values(action.payload.value);
       props.map((prop, index) => {
@@ -95,7 +69,7 @@ export function themeReducer(state = initialState, action) {
       };
     }
     case COLOR_UPDATED: {
-      const color = state.colors[action.payload.id];
+      let color = state.colors[action.payload.id];
       const props = Object.keys(action.payload.value);
       const values = Object.values(action.payload.value);
       props.map((prop, index) => {
@@ -109,6 +83,22 @@ export function themeReducer(state = initialState, action) {
         },
       };
     }
+    case COLORS_RANDOMIZED: {
+      let colors = { ...state.colors };
+      Object.keys(colors).map((color) => {
+        if (!colors[color].locked) {
+          colors[color].hex = genHex();
+          colors[color].shades = false;
+        }
+      });
+      console.log(colors);
+      return { ...state, colors: colors };
+    }
+    case THEME_CHANGED:
+      return {
+        ...state,
+        colors: themeLib[action.payload].colors,
+      };
     default:
       return state;
   }
@@ -119,14 +109,13 @@ export const getColors = (state) => state.colors;
 export const getThemes = (state) => state.themes;
 
 // action types
-export const THEME_CHANGED = 'theme/themeChange';
-export const COLOR_ADDED = 'theme/colorAdd';
-export const COLOR_DELETED = 'theme/colorDelete';
-export const COLOR_UPDATED = 'theme/colorUpdate';
-export const COLOR_NAME_UPDATED = 'theme/colorNameUpdated';
-export const COLOR_HEX_UPDATED = 'theme/colorHexUpdated';
-export const COLOR_SHADES_TOGGLED = 'theme/colorShadesToggled';
-export const COLOR_SHADES_UPDATED = 'theme/colorShadesUpdated';
+const COLOR_ADDED = 'theme/colorAdd';
+const COLOR_DELETED = 'theme/colorDelete';
+const COLOR_UPDATED = 'theme/colorUpdate';
+const COLORS_RANDOMIZED = 'theme/colorsRandomized';
+const COLOR_SHADES_TOGGLED = 'theme/colorShadesToggled';
+const COLOR_SHADES_UPDATED = 'theme/colorShadesUpdated';
+const THEME_CHANGED = 'theme/themeChange';
 
 // action creators
 export const changeTheme = (theme) => ({
@@ -143,19 +132,13 @@ export const deleteColor = (id) => ({
   payload: id,
 });
 
-export const updateColorName = (id, value) => ({
-  type: COLOR_NAME_UPDATED,
-  payload: { id, value },
-});
-
 export const updateColor = (id, value) => ({
   type: COLOR_UPDATED,
   payload: { id, value },
 });
 
-export const updateColorHex = (id, value) => ({
-  type: COLOR_HEX_UPDATED,
-  payload: { id, value },
+export const randomizeColors = () => ({
+  type: COLORS_RANDOMIZED,
 });
 
 export const toggleColorShades = (id, value) => ({

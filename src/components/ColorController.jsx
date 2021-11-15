@@ -2,11 +2,13 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import useDebouncy from 'use-debouncy/lib/effect';
 import { HexColorPicker, HexColorInput } from 'react-colorful';
+import Button from './Button';
 import InputNumber from './InputNumber';
 import InputToggle from './InputToggle';
 import Swatch from './Swatch';
+import IconDice from '../icons/dice.svg';
 import { updateColor } from '../store/colors';
-import { genShades } from '../js/colorFuncs';
+import { genHex, genShades } from '../js/colorFuncs';
 
 function ColorController({ color }) {
   const dispatch = useDispatch();
@@ -46,6 +48,13 @@ function ColorController({ color }) {
       setShades(
         genShades(e.toUpperCase(), shadeAmount, basePos, hue, sat, light)
       );
+    }
+  };
+  const handleRandomHex = () => {
+    const randHex = genHex();
+    setHex(randHex);
+    if (enableShades) {
+      setShades(genShades(randHex, shadeAmount, basePos, hue, sat, light));
     }
   };
   useDebouncy(() => dispatch(updateColor(color.id, { hex, shades })), 100, [
@@ -129,13 +138,19 @@ function ColorController({ color }) {
             color={hex}
             onChange={handleHexChange}
           />
-          <HexColorInput
-            id={formId.hex}
-            type="text"
-            color={hex}
-            onChange={handleHexChange}
-            prefixed={true}
-          />
+          <div className="flex gap-4">
+            <HexColorInput
+              id={formId.hex}
+              type="text"
+              color={hex}
+              onChange={handleHexChange}
+              prefixed={true}
+            />
+            <Button type="icon" className="mb-0" onClick={handleRandomHex}>
+              <IconDice />
+              <span className="sr-only">Random color</span>
+            </Button>
+          </div>
         </div>
         <InputToggle
           id={formId.enableShades}
