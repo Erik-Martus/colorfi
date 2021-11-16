@@ -14,7 +14,7 @@ function ThemeBuilder() {
   const [colorCount, setColorCount] = useState(Object.keys(colors).length + 1);
   const onAdd = () => {
     dispatch(addColor(`color-${colorCount}`));
-    setColorCount((count) => count++);
+    setColorCount((count) => count + 1);
   };
   const onRandomize = () => {
     dispatch(randomizeColors());
