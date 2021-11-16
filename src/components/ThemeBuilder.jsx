@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import Button from './Button';
@@ -9,10 +10,11 @@ import { getColors, addColor, randomizeColors } from '../store/colors';
 
 function ThemeBuilder() {
   const colors = useSelector(getColors);
-  console.log(Object.values(colors).map((color) => color.hex));
   const dispatch = useDispatch();
+  const [colorCount, setColorCount] = useState(Object.keys(colors).length + 1);
   const onAdd = () => {
-    dispatch(addColor());
+    dispatch(addColor(`color-${colorCount}`));
+    setColorCount((count) => count++);
   };
   const onRandomize = () => {
     dispatch(randomizeColors());

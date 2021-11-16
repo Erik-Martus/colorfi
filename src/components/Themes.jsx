@@ -1,14 +1,16 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import Swatch from './Swatch';
 import SwatchLabel from './SwatchLabel';
-import { getThemes, changeTheme } from '../store/colors';
+import { changeTheme } from '../store/colors';
+import themeLibrary from '../data/themes.json';
 
 function Themes({ onChange }) {
-  const themes = useSelector(getThemes);
+  const themes = themeLibrary;
   const dispatch = useDispatch();
   function onThemeChange(e) {
-    dispatch(changeTheme(e.target.value));
+    const colors = themes[e.target.value].colors;
+    dispatch(changeTheme(colors));
     onChange();
   }
   const themeItems = Object.keys(themes).map((theme) => (

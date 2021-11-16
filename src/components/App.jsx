@@ -1,11 +1,16 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import Header from './Header.jsx';
 import Intro from './Intro';
 import Footer from './Footer.jsx';
 import ThemeBuilder from './ThemeBuilder.jsx';
 import CodeOutput from './CodeOutput.jsx';
+import { getPast, getColors, getFuture } from '../store/colors.js';
 
 function App() {
+  console.log('Past:', useSelector(getPast));
+  console.log('Present:', useSelector(getColors));
+  console.log('Future:', useSelector(getFuture));
   return (
     <div className="App w-screen relative font-sans bg-gray-100">
       <Header />
