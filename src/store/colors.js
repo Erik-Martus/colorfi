@@ -9,7 +9,7 @@ const initialState = {
   themes: themeLib,
 };
 
-export function themeReducer(state = initialState, action) {
+const colorReducer = (state = initialState, action) => {
   switch (action.type) {
     case COLOR_ADDED: {
       const id = genColorId();
@@ -102,20 +102,27 @@ export function themeReducer(state = initialState, action) {
     default:
       return state;
   }
-}
+};
+
+export default colorReducer;
 
 // selectors
-export const getColors = (state) => state.colors;
-export const getThemes = (state) => state.themes;
+export const getColors = (state) => {
+  return state.present.colors;
+};
+export const getThemes = (state) => state.present.themes;
+export const getPast = (state) => state.past;
+export const getPresent = (state) => state.present;
+export const getFuture = (state) => state.future;
 
 // action types
-const COLOR_ADDED = 'theme/colorAdd';
-const COLOR_DELETED = 'theme/colorDelete';
-const COLOR_UPDATED = 'theme/colorUpdate';
-const COLORS_RANDOMIZED = 'theme/colorsRandomized';
-const COLOR_SHADES_TOGGLED = 'theme/colorShadesToggled';
-const COLOR_SHADES_UPDATED = 'theme/colorShadesUpdated';
-const THEME_CHANGED = 'theme/themeChange';
+const COLOR_ADDED = 'color/colorAdd';
+const COLOR_DELETED = 'color/colorDelete';
+const COLOR_UPDATED = 'color/colorUpdate';
+const COLORS_RANDOMIZED = 'color/colorsRandomized';
+const COLOR_SHADES_TOGGLED = 'color/colorShadesToggled';
+const COLOR_SHADES_UPDATED = 'color/colorShadesUpdated';
+const THEME_CHANGED = 'color/themeChange';
 
 // action creators
 export const changeTheme = (theme) => ({

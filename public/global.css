@@ -102,6 +102,11 @@
         @apply h-full mx-auto;
       }
     }
+
+    &:disabled,
+    &[disabled] {
+      @apply bg-gray-300 text-gray-600 cursor-not-allowed hover:scale-100;
+    }
   }
 
   .color-picker.react-colorful {

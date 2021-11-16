@@ -1,7 +1,10 @@
 import { createStore } from 'redux';
-import { themeReducer } from './colors';
+import undoable from 'redux-undo';
+import colorReducer from './colors';
+
+const COLOR_UNDO = 'color/colorUndo';
 
 export const store = createStore(
-  themeReducer,
+  undoable(colorReducer),
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
