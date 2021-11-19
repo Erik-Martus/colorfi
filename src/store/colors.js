@@ -1,4 +1,4 @@
-import { genColorId, genHex, initColors, genShades } from '../js/colorFuncs';
+import { genColorId, genHex, initColors } from '../js/colorFuncs';
 
 const initialState = initColors(5);
 

@@ -12,6 +12,23 @@ const devConfig = merge(COMMON, {
       directory: './dist',
     },
   },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+            },
+          },
+          'postcss-loader',
+        ],
+      },
+    ],
+  },
   resolve: {
     alias: {
       'react-dom': '@hot-loader/react-dom',

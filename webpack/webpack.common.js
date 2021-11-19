@@ -9,8 +9,8 @@ const config = {
     path.resolve(__dirname, '../src/index.jsx'),
   ],
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'index.js',
+    path: path.resolve(__dirname, '../dist'),
+    filename: '[name].[contenthash].js',
     clean: true,
   },
   module: {
@@ -19,19 +19,6 @@ const config = {
         test: /\.(js|jsx)$/,
         use: 'babel-loader',
         exclude: /node_modules/,
-      },
-      {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1,
-            },
-          },
-          'postcss-loader',
-        ],
       },
       {
         test: /\.svg$/,
