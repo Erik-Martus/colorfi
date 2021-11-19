@@ -22,15 +22,12 @@ const colorReducer = (state = initialState, action) => {
       return remainingColors;
     }
     case COLOR_UPDATED: {
-      console.log('Updating color ', action.payload.id);
-      console.log('Present color: ', state[action.payload.id]);
       let color = { ...state[action.payload.id] };
       const props = Object.keys(action.payload.value);
       const values = Object.values(action.payload.value);
       props.map((prop, index) => {
         color[prop] = values[index];
       });
-      console.log('Updated color: ', color);
       return {
         ...state,
         [action.payload.id]: color,

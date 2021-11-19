@@ -1,3 +1,4 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 import IconMinus from '../icons/minus.svg';
 import IconPlus from '../icons/plus.svg';

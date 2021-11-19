@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { getColors } from '../store/colors';
 import CodeHighlight from './CodeHighlight.jsx';
-import Button from './Button';
-import InputRadioGroup from './InputRadioGroup';
+import Button from './Button.jsx';
+import InputRadioGroup from './InputRadioGroup.jsx';
 
 function CodeOutput() {
   const colors = useSelector(getColors);

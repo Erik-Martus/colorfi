@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import Button from './Button';
-import Modal from './Modal';
-import Themes from './Themes';
+import React, { useState } from 'react';
+import Button from './Button.jsx';
+import Modal from './Modal.jsx';
+import Themes from './Themes.jsx';
 import IconArrowDown from '../icons/arrow-down.svg';
 
 function Intro() {

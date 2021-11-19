@@ -1,7 +1,8 @@
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import Swatch from './Swatch';
-import SwatchLabel from './SwatchLabel';
+import Swatch from './Swatch.jsx';
+import SwatchLabel from './SwatchLabel.jsx';
 import { changeTheme } from '../store/colors';
 import themeLibrary from '../data/themes.json';
 

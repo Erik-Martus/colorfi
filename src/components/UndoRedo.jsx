@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { ActionCreators } from 'redux-undo';
-import Button from './Button';
+import Button from './Button.jsx';
 import IconRedo from '../icons/redo.svg';
 import IconUndo from '../icons/undo.svg';
 import { getPast, getFuture } from '../store/colors';

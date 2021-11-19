@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import useDebouncy from 'use-debouncy/lib/effect';
 import { HexColorPicker, HexColorInput } from 'react-colorful';
-import Button from './Button';
-import InputNumber from './InputNumber';
-import InputToggle from './InputToggle';
-import Swatch from './Swatch';
+import Button from './Button.jsx';
+import InputNumber from './InputNumber.jsx';
+import InputToggle from './InputToggle.jsx';
+import Swatch from './Swatch.jsx';
 import IconDice from '../icons/dice.svg';
 import { updateColor } from '../store/colors';
 import { genHex, genShades } from '../js/colorFuncs';

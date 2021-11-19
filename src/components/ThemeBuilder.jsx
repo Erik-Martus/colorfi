@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import Button from './Button';
-import UndoRedo from './UndoRedo';
-import ColorItem from './ColorItem';
+import Button from './Button.jsx';
+import UndoRedo from './UndoRedo.jsx';
+import ColorItem from './ColorItem.jsx';
 import IconDice from '../icons/dice.svg';
 import IconPlusCircle from '../icons/plus-circle.svg';
 import { getColors, addColor, randomizeColors } from '../store/colors';

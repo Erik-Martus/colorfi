@@ -1,12 +1,15 @@
 {
   "presets": [
     [
-      "@babel/preset-react",
-      { "runtime": "automatic", "importSource": "@emotion/react" }
-    ]
+      "@babel/preset-env",
+      {
+        "modules": false
+      }
+    ],
+    "@babel/preset-react"
   ],
   "plugins": [
-    "@emotion",
+    "react-hot-loader/babel",
     [
       "prismjs",
       {

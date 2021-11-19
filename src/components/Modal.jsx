@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Button from './Button';
+import Button from './Button.jsx';
 import IconClose from '../icons/close.svg';
 
 const noScroll = (hidden) => {

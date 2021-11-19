@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import Button from './Button';
-import ColorController from './ColorController';
-import Modal from './Modal';
-import Swatch from './Swatch';
-import SwatchLabel from './SwatchLabel';
+import Button from './Button.jsx';
+import ColorController from './ColorController.jsx';
+import Modal from './Modal.jsx';
+import Swatch from './Swatch.jsx';
+import SwatchLabel from './SwatchLabel.jsx';
 import IconEdit from '../icons/pencil.svg';
 import IconTrash from '../icons/trash.svg';
 import IconLocked from '../icons/padlock.svg';
@@ -14,7 +14,10 @@ import { deleteColor, updateColor } from '../store/colors';
 function ColorItem({ color }) {
   const dispatch = useDispatch();
   const [hiddenState, setHiddenState] = useState(true);
-  const [locked, setLocked] = useState(false);
+  const [locked, setLocked] = useState(color.locked);
+  useEffect(() => {
+    setLocked(color.locked);
+  }, [color]);
 
   const handleEdit = () => setHiddenState(false);
   const handleDelete = (e) => dispatch(deleteColor(color.id));

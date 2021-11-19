@@ -1,7 +1,8 @@
+import { hot } from 'react-hot-loader/root';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import Header from './Header.jsx';
-import Intro from './Intro';
+import Intro from './Intro.jsx';
 import Footer from './Footer.jsx';
 import ThemeBuilder from './ThemeBuilder.jsx';
 import CodeOutput from './CodeOutput.jsx';
@@ -26,4 +27,4 @@ function App() {
   );
 }
 
-export default App;
+export default hot(App);
