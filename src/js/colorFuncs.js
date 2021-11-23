@@ -45,14 +45,14 @@ export const genShades = (hex, amount, pos, h, s, l) => {
   const rightAmount = amount - pos;
 
   for (let i = 1; i <= leftAmount; i++) {
-    let hue = baseShade[0] === NaN ? 0 - h * i : baseShade[0] - h * i;
-    let saturation = baseShade[1] - (s / 100) * i;
-    let lightness = baseShade[2] - (l / 100) * i;
+    let hue = baseShade[0] === NaN ? 0 + h * i : baseShade[0] + h * i;
+    let saturation = baseShade[1] + (s / 100) * i;
+    let lightness = baseShade[2] + (l / 100) * i;
     let shade = chroma
       .hsl(
-        hue < 0 ? hue + 360 : hue,
-        saturation < 0 ? 0 : saturation,
-        lightness < 0 ? 0 : lightness
+        hue > 360 ? hue - 360 : hue,
+        saturation > 1 ? 1 : saturation,
+        lightness > 1 ? 1 : lightness
       )
       .hex();
     shades[baseIndex - i] = {
@@ -62,14 +62,14 @@ export const genShades = (hex, amount, pos, h, s, l) => {
   }
 
   for (let i = 1; i <= rightAmount; i++) {
-    let hue = baseShade[0] === NaN ? 0 + h * i : baseShade[0] + h * i;
-    let saturation = baseShade[1] + (s / 100) * i;
-    let lightness = baseShade[2] + (l / 100) * i;
+    let hue = baseShade[0] === NaN ? 0 - h * i : baseShade[0] - h * i;
+    let saturation = baseShade[1] - (s / 100) * i;
+    let lightness = baseShade[2] - (l / 100) * i;
     let shade = chroma
       .hsl(
-        hue > 360 ? hue - 360 : hue,
-        saturation > 1 ? 1 : saturation,
-        lightness > 1 ? 1 : lightness
+        hue < 0 ? hue + 360 : hue,
+        saturation < 0 ? 0 : saturation,
+        lightness < 0 ? 0 : lightness
       )
       .hex();
     shades[baseIndex + i] = {

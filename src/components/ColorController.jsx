@@ -185,7 +185,7 @@ function ColorController({ color }) {
               id={formId.hue}
               label="Hue:"
               value={hue}
-              min={0}
+              min={-360}
               max={360}
               onChange={handleHueChange}
             />
@@ -193,7 +193,7 @@ function ColorController({ color }) {
               id={formId.saturation}
               label="Saturation:"
               value={sat}
-              min={0}
+              min={-100}
               max={100}
               onChange={handleSatChange}
             />
@@ -201,7 +201,7 @@ function ColorController({ color }) {
               id={formId.lightness}
               label="Lightness:"
               value={light}
-              min={0}
+              min={-100}
               max={100}
               onChange={handleLightChange}
             />
