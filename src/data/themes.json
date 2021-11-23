@@ -78,5 +78,311 @@
         "locked": false
       }
     }
+  },
+  "Earthy": {
+    "name": "Earthy",
+    "colors": {
+      "color-dba9": {
+        "id": "color-dba9",
+        "name": "Crevice",
+        "hex": "#46211A",
+        "shades": false,
+        "locked": false
+      },
+      "color-1dfc": {
+        "id": "color-1dfc",
+        "name": "Cloud Shadow",
+        "hex": "#693D3D",
+        "shades": false,
+        "locked": false
+      },
+      "color-f4e3": {
+        "id": "color-f4e3",
+        "name": "Desert",
+        "hex": "#BA5536",
+        "shades": false,
+        "locked": false
+      },
+      "color-a1a4": {
+        "id": "color-a1a4",
+        "name": "Red Clay",
+        "hex": "#A43820",
+        "shades": false,
+        "locked": false
+      }
+    }
+  },
+  "Arctic": {
+    "name": "Arctic",
+    "colors": {
+      "color-082e": {
+        "id": "color-082e",
+        "name": "Overcast",
+        "hex": "#F1F1F2",
+        "shades": false,
+        "locked": false
+      },
+      "color-5922": {
+        "id": "color-5922",
+        "name": "Warm Gray",
+        "hex": "#BCBABE",
+        "shades": false,
+        "locked": false
+      },
+      "color-f22f": {
+        "id": "color-f22f",
+        "name": "Ice",
+        "hex": "#A1D6E2",
+        "shades": false,
+        "locked": false
+      },
+      "color-0132": {
+        "id": "color-0132",
+        "name": "Glacier Blue",
+        "hex": "#1995AD",
+        "shades": false,
+        "locked": false
+      }
+    }
+  },
+  "Blueberry": {
+    "name": "Blueberry",
+    "colors": {
+      "color-b8d0": {
+        "id": "color-b8d0",
+        "name": "Midnight Blue",
+        "hex": "#1E1F26",
+        "shades": false,
+        "locked": false
+      },
+      "color-2594": {
+        "id": "color-2594",
+        "name": "Indigo Ink",
+        "hex": "#283655",
+        "shades": false,
+        "locked": false
+      },
+      "color-19c0": {
+        "id": "color-19c0",
+        "name": "Blueberry",
+        "hex": "#4D648D",
+        "shades": false,
+        "locked": false
+      },
+      "color-f7a5": {
+        "id": "color-f7a5",
+        "name": "Periwinkle",
+        "hex": "#D0E1F9",
+        "shades": false,
+        "locked": false
+      }
+    }
+  },
+  "Pastels": {
+    "name": "Pastels",
+    "colors": {
+      "color-e52a": {
+        "id": "color-e52a",
+        "name": "Baby Blue",
+        "hex": "#C1E1DC",
+        "shades": false,
+        "locked": false
+      },
+      "color-3274": {
+        "id": "color-3274",
+        "name": "Peach",
+        "hex": "#FFCCAC",
+        "shades": false,
+        "locked": false
+      },
+      "color-81b9": {
+        "id": "color-81b9",
+        "name": "Butter",
+        "hex": "#FFEB94",
+        "shades": false,
+        "locked": false
+      },
+      "color-b9e3": {
+        "id": "color-b9e3",
+        "name": "Butterscotch",
+        "hex": "#FDD475",
+        "shades": false,
+        "locked": false
+      }
+    }
+  },
+  "Citrus": {
+    "name": "Citrus",
+    "colors": {
+      "color-dbb5": {
+        "id": "color-dbb5",
+        "name": "Citrus Orange",
+        "hex": "#FAAF08",
+        "shades": false,
+        "locked": false
+      },
+      "color-0474": {
+        "id": "color-0474",
+        "name": "Grapefruit",
+        "hex": "#FA812F",
+        "shades": false,
+        "locked": false
+      },
+      "color-e55f": {
+        "id": "color-e55f",
+        "name": "Ruby Red",
+        "hex": "#FA4032",
+        "shades": false,
+        "locked": false
+      },
+      "color-adbc": {
+        "id": "color-adbc",
+        "name": "Off White",
+        "hex": "#FEF3E2",
+        "shades": false,
+        "locked": false
+      }
+    }
+  },
+  "Apple Orchard": {
+    "name": "Apple Orchard",
+    "colors": {
+      "color-427e": {
+        "id": "color-427e",
+        "name": "Golden Delicious",
+        "hex": "#F4EC6A",
+        "shades": false,
+        "locked": false
+      },
+      "color-50d4": {
+        "id": "color-50d4",
+        "name": "Granny Smith",
+        "hex": "#BBCF4A",
+        "shades": false,
+        "locked": false
+      },
+      "color-9442": {
+        "id": "color-9442",
+        "name": "Ripe apple",
+        "hex": "#E73F0B",
+        "shades": false,
+        "locked": false
+      },
+      "color-fa80": {
+        "id": "color-fa80",
+        "name": "Red Delicious",
+        "hex": "#A11F0C",
+        "shades": false,
+        "locked": false
+      }
+    }
+  },
+  "Muted Primary": {
+    "name": "Muted Primary",
+    "colors": {
+      "color-2812": {
+        "id": "color-2812",
+        "name": "Paradise Pink",
+        "hex": "#EF476F",
+        "shades": false,
+        "locked": false
+      },
+      "color-a49a": {
+        "id": "color-a49a",
+        "name": "Orange Yellow Crayola",
+        "hex": "#FFD166",
+        "shades": false,
+        "locked": false
+      },
+      "color-c90f": {
+        "id": "color-c90f",
+        "name": "Caribbean Green",
+        "hex": "#06D6A0",
+        "shades": false,
+        "locked": false
+      },
+      "color-21bb": {
+        "id": "color-21bb",
+        "name": "Blue NCS",
+        "hex": "#118AB2",
+        "shades": false,
+        "locked": false
+      },
+      "color-e17e": {
+        "id": "color-e17e",
+        "name": "Midnight Green Eagle Green",
+        "hex": "#073B4C",
+        "shades": false,
+        "locked": false
+      }
+    }
+  },
+  "Expanded Pastels": {
+    "name": "Expanded Pastels",
+    "colors": {
+      "color-8f97": {
+        "id": "color-8f97",
+        "name": "Magnolia",
+        "hex": "#EAE4E9",
+        "shades": false,
+        "locked": false
+      },
+      "color-928f": {
+        "id": "color-928f",
+        "name": "Linen",
+        "hex": "#FFF1E6",
+        "shades": false,
+        "locked": false
+      },
+      "color-8a7f": {
+        "id": "color-8a7f",
+        "name": "Pale Pink",
+        "hex": "#FDE2E4",
+        "shades": false,
+        "locked": false
+      },
+      "color-847c": {
+        "id": "color-847c",
+        "name": "Mimi Pink",
+        "hex": "#FAD2E1",
+        "shades": false,
+        "locked": false
+      },
+      "color-75b1": {
+        "id": "color-75b1",
+        "name": "Mint Cream",
+        "hex": "#E2ECE9",
+        "shades": false,
+        "locked": false
+      },
+      "color-eb98": {
+        "id": "color-eb98",
+        "name": "Powder Blue",
+        "hex": "#BEE1E6",
+        "shades": false,
+        "locked": false
+      },
+      "color-223f": {
+        "id": "color-223f",
+        "name": "Isabelline",
+        "hex": "#F0EFEB",
+        "shades": false,
+        "locked": false
+      },
+      "color-3e06": {
+        "id": "color-3e06",
+        "name": "Lavender Web",
+        "hex": "#DFE7FD",
+        "shades": false,
+        "locked": false
+      },
+      "color-9b9f": {
+        "id": "color-9b9f",
+        "name": "Periwinkle Crayola",
+        "hex": "#CDDAFD",
+        "shades": false,
+        "locked": false
+      }
+    }
   }
 }

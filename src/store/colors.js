@@ -2,6 +2,10 @@ import { genColorId, genHex, initColors } from '../js/colorFuncs';
 
 const initialState = initColors(5);
 
+for (let index = 0; index < 20; index++) {
+  console.log(genColorId());
+}
+
 const colorReducer = (state = initialState, action) => {
   switch (action.type) {
     case COLOR_ADDED: {

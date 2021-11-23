@@ -15,7 +15,7 @@ function Themes({ onChange }) {
     onChange();
   }
   const themeItems = Object.keys(themes).map((theme) => (
-    <article key={themes[theme].name} className="">
+    <article key={themes[theme].name}>
       <input
         type="radio"
         id={themes[theme].name}
@@ -35,8 +35,8 @@ function Themes({ onChange }) {
   ));
 
   return (
-    <article>
-      <div className="grid grid-cols-auto-fill">{themeItems}</div>
+    <article className="flex-auto overflow-y-scroll overflow-x-visible">
+      <div className="grid grid-cols-auto-fill px-2">{themeItems}</div>
     </article>
   );
 }
